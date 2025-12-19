@@ -1,0 +1,28 @@
+/* Language toggle — hard center */
+.lang-toggle-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  box-sizing: border-box;
+}
+
+/* Button look */
+.lang-toggle {
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid #aaa;
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,.08);
+  display: inline-block;
+}
+
+/* Symmetric language visibility */
+html[data-lang="en"] .spanish { display: none !important; }
+html[data-lang="es"] .english { display: none !important; }
+
+/* Optional: remove top margin if your theme adds spacing between rows */
+.lang-toggle-bar + * { margin-top: 0; }

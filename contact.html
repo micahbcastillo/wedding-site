@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html data-lang="en" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Contact Us</title>
+<link href="styles.css" rel="stylesheet"/>
+<style>
+    .contact-card {
+      background-color: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      padding: 30px;
+      max-width: 700px;
+      margin: 0 auto 40px auto;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      animation: fadeIn 0.6s ease-in-out both;
+    }
+
+    .contact-card h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    .contact-card p {
+      margin-bottom: 16px;
+      font-size: 1.05rem;
+      color: #444;
+    }
+
+    .contact-card a {
+      color: #a23f3f;
+      text-decoration: none;
+    }
+
+    .contact-card a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-icon {
+      display: block;
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 20px;
+      animation: float 2s ease-in-out infinite;
+      color: #a23f3f;
+    }
+
+    iframe {
+      width: 100%;
+      max-width: 700px;
+      height: 550px;
+      border: 0;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+      display: block;
+      margin: 0 auto 60px auto;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @media (max-width: 768px) {
+      .contact-card {
+        padding: 20px;
+      }
+    }
+  </style>
+<style>
+/* Center the language toggle bar */
+.lang-toggle-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  box-sizing: border-box;
+}
+</style><style>
+/* Language visibility rules (symmetric) */
+html[data-lang="en"] .spanish { display: none !important; }
+html[data-lang="es"] .english { display: none !important; }
+</style></head>
+<body>
+<nav>
+<ul>
+<li><a href="index.html"><span class="english">Home</span><span class="spanish">Inicio</span></a></li>
+<li><a href="timeline.html"><span class="english">Timeline</span><span class="spanish">Cronología</span></a></li>
+<li><a href="details.html"><span class="english">Event Details</span><span class="spanish">Detalles del Evento</span></a></li>
+<li><a href="rsvp.html"><span class="english">RSVP</span><span class="spanish">Confirmación</span></a></li>
+<li><a href="registry.html"><span class="english">Registry</span><span class="spanish">Registro</span></a></li>
+<li><a href="travel.html"><span class="english">Travel</span><span class="spanish">Viajes</span></a></li>
+<li><a href="contact.html"><span class="english">Contact</span><span class="spanish">Contacto</span></a></li>
+<li>
+<a href="gacha/gacha.html">
+<img class="nav-icon" src="images/Item_Masterless_Starglitter.webp"/>
+</a>
+</li>
+</ul>
+</nav><div class="lang-toggle-bar"><button aria-label="Toggle language" class="lang-toggle" id="lang-toggle" type="button">ES</button></div>
+<section class="container" id="contact">
+<div class="contact-card">
+<div class="contact-icon">✉️</div>
+<h2><span class="english">Contact Us</span><span class="spanish">Contáctanos</span></h2>
+<p class="english">We’re so excited to celebrate with you! If you have any questions about travel logistics, RSVP, or any other detail, please contact us.</p>
+<p class="spanish">¡Estamos muy emocionados de celebrar con ustedes! Si tienen preguntas sobre viajes, confirmación de asistencia o cualquier otro detalle, por favor contáctenos.</p>
+<p><strong><span class="english">Email: </span><span class="spanish">Correo electrónico:</span></strong> <a href="mailto:micahcarolina2021@gmail.com">micahcarolina2021@gmail.com</a></p>
+<p><strong><span class="english">Wedding Date: </span><span class="spanish">Fecha: </span></strong><span class="english">April 18, 2026</span><span class="spanish">18 de abril de 2026</span><br/>
+<strong><span class="english">Location:</span><span class="spanish">Ubicación:</span></strong> The Lake House, Grand Central Park, Conroe, TX</p>
+<p><strong><span class="english">Day-of Contact: </span><span class="spanish">Contacto para el día del evento:</span></strong> Meibys — <a href="tel:1234567890">(305) 834-9601</a><br/>
+<em><span class="english">Text preferred for urgent wedding‑day questions only.</span><span class="spanish">Texto preferido solo para preguntas urgentes el día del evento.</span></em></p>
+</div>
+<!-- Google Form Embed (Replace with your real link if desired) -->
+<iframe frameborder="0" height="856" marginheight="0" marginwidth="0" src="https://docs.google.com/forms/d/e/1FAIpQLSciIM6Ew7LPWHkJUd-J5UL5ZY2QPt9iSMsqkPhthHgwmM55ZQ/viewform?embedded=true" width="640">Loading…</iframe>
+</section>
+<footer>
+<p class="english">© 2026 Micah &amp; Carolina. All rights reserved.</p>
+</footer>
+<script src="lang-toggle.js"></script>
+</body>
+</html>

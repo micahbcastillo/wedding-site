@@ -1,0 +1,75 @@
+<!-- details.html -->
+<!DOCTYPE html>
+
+<html data-lang="en" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title><span class="english">Event Details</span><span class="spanish">Detalles del Evento</span></title>
+<link href="styles.css" rel="stylesheet"/>
+<style>
+/* Center the language toggle bar */
+.lang-toggle-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  box-sizing: border-box;
+}
+</style><style>
+/* Language visibility rules (symmetric) */
+html[data-lang="en"] .spanish { display: none !important; }
+html[data-lang="es"] .english { display: none !important; }
+</style></head>
+<body>
+<nav>
+<ul>
+<li><a href="index.html"><span class="english">Home</span><span class="spanish">Inicio</span></a></li>
+<li><a href="timeline.html"><span class="english">Timeline</span><span class="spanish">Cronología</span></a></li>
+<li><a href="details.html"><span class="english">Event Details</span><span class="spanish">Detalles del Evento</span></a></li>
+<li><a href="rsvp.html"><span class="english">RSVP</span><span class="spanish">Confirmación</span></a></li>
+<li><a href="registry.html"><span class="english">Registry</span><span class="spanish">Registro</span></a></li>
+<li><a href="travel.html"><span class="english">Travel</span><span class="spanish">Viajes</span></a></li>
+<li><a href="contact.html"><span class="english">Contact</span><span class="spanish">Contacto</span></a></li>
+<li>
+<a href="gacha/gacha.html">
+<img class="nav-icon" src="images/Item_Masterless_Starglitter.webp"/>
+</a>
+</li>
+</ul>
+</nav><div class="lang-toggle-bar"><button aria-label="Toggle language" class="lang-toggle" id="lang-toggle" type="button">ES</button></div>
+<!-- VENUE SHOWCASE IMAGE -->
+<section id="venue-showcase">
+<div class="venue-image-wrapper">
+<img alt="The Lake House at Grand Central Park" data-i18n-en="The Lake House at Grand Central Park" data-i18n-es="La Casa del Lago en Grand Central Park" src="images/lakehouse.jpeg"/>
+</div>
+</section>
+<section class="container" id="details">
+<h2><span class="english">Event Details</span><span class="spanish">Detalles del Evento</span></h2>
+<div class="grid">
+<!-- Text column -->
+<div>
+<h3><span class="english">Ceremony &amp; Reception</span><span class="spanish">Ceremonia y Recepción</span></h3>
+<p>
+<strong><span class="english">Date: </span><span class="spanish">Fecha: </span></strong><span class="english">April 18, 2026</span><span class="spanish">18 de abril de 2026</span><br/>
+<strong><span class="english">Ceremony Time: </span><span class="spanish">Hora de Ceremonia: </span></strong> 3:00 PM<br/>
+<strong><span class="english">Reception Time: </span><span class="spanish">Hora de Recepción: </span></strong> 5:00 PM – 9:00 PM<br/>
+<strong><span class="english">Location: </span><span class="spanish">Lugar: </span></strong><br/><span class="english">The Lake House at Grand Central Park</span><span class="spanish">La Casa del Lago en Grand Central Park</span><br/>
+          Conroe, TX<br/>
+<a href="https://maps.app.goo.gl/aL8d731cH8z5Yk3y7" rel="noopener" target="_blank"><span class="english">View in Google Maps</span><span class="spanish">Ver en Google Maps</span></a>
+</p>
+</div>
+<!-- Map column -->
+<div class="map-container">
+<iframe allowfullscreen="" height="100%" loading="lazy" src="https://www.google.com/maps?q=The+Lake+House+at+Grand+Central+Park%2C+Conroe%2C+TX&amp;output=embed" style="border:0;" width="100%">
+</iframe>
+</div>
+</div>
+</section>
+<footer>
+<p><span class="english">© 2026 Micah &amp; Carolina. All rights reserved.</span><span class="spanish">Todos los derechos reservados.</span></p>
+</footer>
+<script src="lang-toggle.js"></script>
+</body>
+</html>

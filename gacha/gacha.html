@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html data-lang="en" lang="en">
+<head>
+<meta charset="utf-8"/>
+<title><span class="english">Memory Gacha</span><span class="spanish">Gira Memoria</span></title>
+<link href="../styles.css" rel="stylesheet"/>
+<link href="gacha.css" rel="stylesheet"/>
+</head>
+<body>
+<nav>
+<ul>
+<li><a href="../index.html"><span class="english">Home</span><span class="spanish">Inicio</span></a></li>
+<li><a href="../timeline.html"><span class="english">Timeline</span><span class="spanish">Cronología</span></a></li>
+<li><a href="../details.html"><span class="english">Event Details</span><span class="spanish">Detalles del Evento</span></a></li>
+<li><a href="../rsvp.html"><span class="english">RSVP</span><span class="spanish">Confirmación</span></a></li>
+<li><a href="../registry.html"><span class="english">Registry</span><span class="spanish">Registro</span></a></li>
+<li><a href="../travel.html"><span class="english">Travel</span><span class="spanish">Viajes</span></a></li>
+<li><a href="../contact.html"><span class="english">Contact</span><span class="spanish">Contacto</span></a></li>
+<li>
+<a href="gacha.html">
+<img class="nav-icon" src="../images/Item_Masterless_Starglitter.webp"/>
+</a>
+</li>
+</ul>
+</nav><div class="lang-toggle-bar"><button aria-label="Toggle language" class="lang-toggle lang-toggle" id="lang-toggle" type="button">ES</button></div>
+<div class="gacha-container">
+<h1><span class="english">Draw a Memory!</span><span class="spanish">¡Gira Memoria!</span></h1>
+<button id="gachaButton"><span class="english">Open a Moment</span><span class="spanish">Abrir un Momento</span></button>
+<p id="trackerText"><span class="english">Unlocked 0 of 0 memories</span><span class="spanish">Descubiertas 0 de 0 memorias</span></p>
+
+<div class="hidden" id="resultCard">
+<p class="rarity-label" id="rarityLabel"></p>
+<img id="photoCard"/>
+</div><button id="toggleGallery"><span class="english">View Album</span><span class="spanish">Ver Álbum</span></button>
+<div class="hidden" id="gallery">
+<h2><span class="english">Your Memory Album</span><span class="spanish">Tu Álbum de Memorias</span></h2>
+<div id="galleryGrid"></div>
+</div>
+</div>
+<audio id="gachaSound" preload="auto" src="sounds/pull-sound.mp3"></audio>
+<script src="gacha.js"></script>
+<script defer="True" src="../lang-toggle.js"></script>
+</body>
+</html>

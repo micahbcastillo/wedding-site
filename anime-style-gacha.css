@@ -1,0 +1,123 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap');
+
+body {
+  font-family: 'Cormorant Garamond', serif;
+  background-color: #fdfdfd;
+  color: #333;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.gacha-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gacha-container > button {
+  width: 240px;
+  margin: 10px auto;
+  background-color: #a23f3f;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.gacha-container > button:hover {
+  background-color: #861f1f;
+}
+
+#resultCard {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: 20px;
+  display: inline-block;
+  transition: all 0.5s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0,0,0,0.2);
+}
+
+#photoCard {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  margin-top: 1rem;
+  z-index: 1;
+  position: relative;
+}
+
+.rarity-label {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  z-index: 2;
+  position: relative;
+}
+
+/* Sparkle overlays per rarity */
+#resultCard::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.6;
+  z-index: 0;
+  pointer-events: none;
+  animation: shimmerSpin 3s linear infinite;
+}
+
+.common-style::before {
+  background-image: url('https://i.imgur.com/Z9bK0Pb.png'); /* subtle stars */
+}
+
+.rare-style::before {
+  background-image: url('https://i.imgur.com/jQl5ftz.gif'); /* gentle twinkle */
+}
+
+.ultra-style::before {
+  background-image: url('https://i.imgur.com/f2c1bNB.gif'); /* magic swirls */
+}
+
+.legendary-style::before {
+  background-image: url('https://i.imgur.com/FJbG26X.gif'); /* golden flames */
+  opacity: 0.8;
+}
+
+/* Animation on reveal */
+@keyframes memoryReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.85) translateY(50px) rotate(-10deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05) translateY(-10px) rotate(3deg);
+  }
+  100% {
+    transform: scale(1) translateY(0) rotate(0deg);
+  }
+}
+
+#resultCard.animate {
+  animation: memoryReveal 0.8s ease-out;
+}
+
+@keyframes shimmerSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

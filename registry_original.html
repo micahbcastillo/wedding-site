@@ -1,0 +1,261 @@
+<!-- registry.html -->
+<!DOCTYPE html>
+
+<html data-lang="en" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title><span class="english">Adventure Fund Registry</span><span class="spanish">Registro de Fondo de Aventuras</span></title>
+<!-- Your Stylesheet -->
+<link href="styles.css" rel="stylesheet"/>
+<!-- Leaflet CSS (NO integrity) -->
+<link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
+<style>
+    #map {
+      height: 450px;
+      width: 100%;
+      border-radius: 8px;
+      border: 2px solid #c2b89f;
+      margin-bottom: 20px;
+    }
+
+    .prompt-box {
+      padding: 15px;
+      background: #f8f8f8;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 20px;
+      font-family: 'Cormorant Garamond', serif;
+      color: #5e6b55;
+      font-size: 1.2rem;
+    }
+
+    form {
+      max-width: 600px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    form label {
+      font-weight: bold;
+    }
+
+    form input,
+    form textarea {
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    form button {
+      background: #a23f3f;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #8b332f;
+    }
+  
+
+    .registry-payment-methods {
+      margin: 18px 0 12px;
+      text-align: center;
+    }
+    .registry-payment-methods img {
+      width: 100%;
+      max-width: 980px;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+</style>
+<style>
+/* Center the language toggle bar */
+.lang-toggle-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  box-sizing: border-box;
+}
+</style><style>
+/* Language visibility rules (symmetric) */
+html[data-lang="en"] .spanish { display: none !important; }
+html[data-lang="es"] .english { display: none !important; }
+</style></head>
+<body>
+<nav>
+<ul>
+<li><a href="index.html"><span class="english">Home</span><span class="spanish">Inicio</span></a></li>
+<li><a href="timeline.html"><span class="english">Timeline</span><span class="spanish">Cronología</span></a></li>
+<li><a href="details.html"><span class="english">Event Details</span><span class="spanish">Detalles del Evento</span></a></li>
+<li><a href="rsvp.html"><span class="english">RSVP</span><span class="spanish">Confirmación</span></a></li>
+<li><a href="registry.html"><span class="english">Registry</span><span class="spanish">Registro</span></a></li>
+<li><a href="travel.html"><span class="english">Travel</span><span class="spanish">Viajes</span></a></li>
+<li><a href="contact.html"><span class="english">Contact</span><span class="spanish">Contacto</span></a></li>
+<li>
+<a href="gacha/gacha.html">
+<img class="nav-icon" src="images/Item_Masterless_Starglitter.webp"/>
+</a>
+</li>
+</ul>
+</nav><div class="lang-toggle-bar"><button aria-label="Toggle language" class="lang-toggle" id="lang-toggle" type="button">ES</button></div>
+<section class="container" id="registry">
+<h2><span class="english">Adventure Fund Registry</span><span class="spanish">Registro de Fondo de Aventuras</span></h2>
+<div class="prompt-box">
+<p class="english">
+        Instead of a traditional registry, we invite you to help fund our adventures together!<br/>
+        Click anywhere on the map to suggest a destination you'd love us to visit and share why it’s special.
+      </p>
+<p class="spanish"><span class="english">En lugar de un registro tradicional, ¡te invitamos a contribuir a nuestras aventuras juntos!</span><span class="spanish">Haz clic en cualquier lugar del mapa para sugerir un destino que te encantaría que visitemos y comparte por qué es especial.</span></p>
+</div>
+<div id="map"></div>
+<form action="https://script.google.com/macros/s/AKfycbz6Qz20sifLSn1RNp8n2cevhZt2SmV1JJrIvUlXUIoMKqFQ_zUH7MwUIoVxDJ2TwmuZsw/exec" id="suggestionForm" method="POST">
+<label for="location"><span class="english">Selected Destination</span><span class="spanish">Destino Seleccionado:</span></label>
+<input data-i18n-en="Click on the map" data-i18n-es="Haz clic en el mapa" id="location" name="location" placeholder="Click on the map" readonly="" required="" type="text"/>
+<input type="hidden" id="lat" name="lat" value=""/>
+<input type="hidden" id="lng" name="lng" value=""/>
+<input type="hidden" id="formName" name="formName" value="registry_destination_suggestion"/>
+
+<label for="reason"><span class="english">Why should we visit?</span><span class="spanish">¿Por qué deberíamos visitar?</span></label>
+<textarea data-i18n-en="Share your thoughts…" data-i18n-es="Comparte tus ideas…" id="reason" name="reason" placeholder="Share your thoughts…" required=""></textarea>
+<div class="registry-payment-methods">
+  <img src="images/RegistryPaymentMethods.png" alt="Payment methods: Venmo, Cash App, Zelle">
+</div>
+<button type="submit"><span class="english">Submit Your Suggestion</span><span class="spanish">Enviar Sugerencia</span></button>
+
+<div id="registryStatus" aria-live="polite" style="display:none; margin-top:1rem; padding:0.75rem; border-radius:8px; background:#f0fff4; border:1px solid #b7ebc6; font-weight:600; text-align:center;">
+  <span class="english">Suggestion received — thank you!</span>
+  <span class="spanish">¡Sugerencia recibida — gracias!</span>
+</div>
+</form>
+</section>
+<!-- Leaflet JS (NO integrity) -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const map = L.map('map').setView([20, 0], 2);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(map);
+
+      let marker;
+
+      map.on('click', function (e) {
+        const { lat, lng } = e.latlng;
+
+        
+        const latEl = document.getElementById("lat");
+        const lngEl = document.getElementById("lng");
+        if (latEl) latEl.value = String(lat.toFixed(6));
+        if (lngEl) lngEl.value = String(lng.toFixed(6));
+if (marker) {
+          map.removeLayer(marker);
+        }
+
+        marker = L.marker([lat, lng]).addTo(map);
+
+        // Reverse geocoding to get place name
+        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
+          .then(res => res.json())
+          .then(data => {
+            const name = data.display_name || `Lat: ${lat.toFixed(4)}, Lng: ${lng.toFixed(4)}`;
+            document.getElementById('location').value = name;
+          })
+          .catch(() => {
+            document.getElementById('location').value = `Lat: ${lat.toFixed(4)}, Lng: ${lng.toFixed(4)}`;
+          });
+      });
+      // Handle form submission (send to Google Sheets via Apps Script Web App)
+      const form = document.getElementById('suggestionForm');
+      const status = document.getElementById('registryStatus');
+
+      if (form) {
+        form.addEventListener('submit', async function (e) {
+          e.preventDefault();
+          if (status) { status.style.display = 'none'; }
+
+          const location = document.getElementById('location').value;
+          const reason = document.getElementById('reason').value;
+
+          if (!location || !reason) {
+            const __lang = (document.documentElement.getAttribute('data-lang') || 'en');
+            alert(__lang === 'en'
+              ? 'Please select a destination and provide a reason.'
+              : 'Por favor selecciona un destino y proporciona una razón.'
+            );
+            return;
+          }
+
+          try {
+            const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+            let data = {};
+            try { data = await res.json(); } catch(_) {}
+
+            if (res.ok && (data.ok === true || Object.keys(data).length === 0)) {
+              if (status) {
+                status.style.display = 'block';
+                status.style.background = '#f0fff4';
+                status.style.borderColor = '#b7ebc6';
+                status.innerHTML = '<span class="english">Suggestion received — thank you!</span><span class="spanish">¡Sugerencia recibida — gracias!</span>';
+              }
+              form.reset();
+              if (marker) { map.removeLayer(marker); marker = null; }
+            } else {
+              throw new Error('Submission failed');
+            }
+          } catch (err) {
+            if (status) {
+              status.style.display = 'block';
+              status.style.background = '#fff5f5';
+              status.style.borderColor = '#fecaca';
+              status.innerHTML = '<span class="english">There was a problem submitting your suggestion. Please try again.</span><span class="spanish">Hubo un problema al enviar tu sugerencia. Intenta de nuevo.</span>';
+            } else {
+              alert('Submission failed.');
+            }
+          }
+        });
+      }
+
+    });
+  </script>
+<script>
+// --- Placeholder i18n sync (EN/ES) ---
+(function() {
+  function updatePlaceholders() {
+    var lang = document.documentElement.getAttribute('data-lang') || 'en';
+    var fields = document.querySelectorAll('input[data-i18n-en], textarea[data-i18n-en]');
+    fields.forEach(function(el) {
+      var text = el.getAttribute('data-i18n-' + lang);
+      if (text) el.setAttribute('placeholder', text);
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updatePlaceholders);
+  } else { updatePlaceholders(); }
+  var root = document.documentElement;
+  new MutationObserver(function(muts){
+    for (var i=0;i<muts.length;i++) {
+      if (muts[i].type === 'attributes' && muts[i].attributeName === 'data-lang') {
+        updatePlaceholders();
+        break;
+      }
+    }
+  }).observe(root, { attributes: true });
+})();
+</script>
+
+<script src="lang-toggle.js"></script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html data-lang="en" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title><span class="english">Travel &amp; Accommodations</span><span class="spanish">Viajes y Alojamiento</span></title>
+<link href="styles.css" rel="stylesheet"/>
+<style>
+    .hotel-card {
+      background-color: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-top: 4px solid #a23f3f;
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      transition: box-shadow 0.25s ease, transform 0.2s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .hotel-card:nth-child(even) {
+      animation-delay: 0.1s;
+    }
+    .hotel-card:nth-child(odd) {
+      animation-delay: 0.2s;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hotel-card h3 {
+      font-size: 1.4rem;
+      color: #2c2c2c;
+      margin-bottom: 6px;
+    }
+
+    .hotel-card .hotel-meta {
+      font-size: 0.95rem;
+      color: #888;
+      margin-bottom: 10px;
+    }
+
+    .hotel-card .hotel-description {
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .hotel-card a.hotel-button {
+      display: inline-block;
+      padding: 8px 14px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      text-align: center;
+      color: white;
+      background-color: #a23f3f;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+    }
+
+    .hotel-card a.hotel-button:hover {
+      background-color: #8b332f;
+    }
+
+    @media (max-width: 768px) {
+      .hotel-map-wrapper {
+        flex-direction: column;
+      }
+    }
+  </style>
+<style>
+/* Center the language toggle bar */
+.lang-toggle-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  box-sizing: border-box;
+}
+</style><style>
+/* Language visibility rules (symmetric) */
+html[data-lang="en"] .spanish { display: none !important; }
+html[data-lang="es"] .english { display: none !important; }
+</style></head>
+<body>
+<nav>
+<ul>
+<li><a href="index.html"><span class="english">Home</span><span class="spanish">Inicio</span></a></li>
+<li><a href="timeline.html"><span class="english">Timeline</span><span class="spanish">Cronología</span></a></li>
+<li><a href="details.html"><span class="english">Event Details</span><span class="spanish">Detalles del Evento</span></a></li>
+<li><a href="rsvp.html"><span class="english">RSVP</span><span class="spanish">Confirmación</span></a></li>
+<li><a href="registry.html"><span class="english">Registry</span><span class="spanish">Registro</span></a></li>
+<li><a href="travel.html"><span class="english">Travel</span><span class="spanish">Viajes</span></a></li>
+<li><a href="contact.html"><span class="english">Contact</span><span class="spanish">Contacto</span></a></li>
+<li>
+<a href="gacha/gacha.html">
+<img class="nav-icon" src="images/Item_Masterless_Starglitter.webp"/>
+</a>
+</li>
+</ul>
+</nav><div class="lang-toggle-bar"><button aria-label="Toggle language" class="lang-toggle" id="lang-toggle" type="button">ES</button></div>
+<section class="container" id="travel">
+<h2><span class="english">Travel &amp; Accommodations</span><span class="spanish">Viajes y Alojamiento</span></h2>
+<p class="spanish" style="text-align: center; margin-bottom: 20px;"><span class="english">Use the interactive map or browse our hand‑picked list of hotels near the venue.</span><span class="spanish">Usa el mapa interactivo o explora nuestra selección de hoteles cerca del lugar.</span></p>
+<div class="hotel-map-wrapper" style="display: flex; flex-wrap: wrap; gap: 20px;">
+<!-- Hotel List Left Column -->
+<div style="flex: 1 1 40%; min-width: 300px; max-height: 600px; overflow-y: auto; padding-right: 10px;">
+<div class="hotel-card">
+<h3>Hyatt Regency Conroe</h3>
+<p class="hotel-meta"><span class="english">🏨 ⭐ 4.0 stars • 0.7 miles from venue</span><span class="spanish">🏨 ⭐ 4.0 estrellas • 0.7 millas del lugar</span></p>
+<p class="hotel-description"><span class="english">Modern and upscale hotel just minutes from the venue, with spacious rooms and on‑site dining.</span><span class="spanish">Hotel moderno y elegante a minutos del lugar, con habitaciones amplias y restaurante interno.</span></p>
+<a class="hotel-button" href="https://www.hyatt.com/en-US/hotel/texas/hyatt-regency-conroe" target="_blank"><span class="english">View Hotel</span><span class="spanish">Ver Hotel</span></a>
+</div>
+<div class="hotel-card">
+<h3>Homewood Suites by Hilton Conroe</h3>
+<p class="hotel-meta"><span class="english">🏨 ⭐ 3.0 stars • 1.2 miles from venue</span><span class="spanish">🏨 ⭐ 3.0 estrellas • 1.2 millas del lugar</span></p>
+<p class="hotel-description"><span class="english">All‑suite hotel with kitchens, complimentary breakfast, and a comfortable extended-stay feel.</span><span class="spanish">Hotel tipo suite con cocina, desayuno incluido y ambiente ideal para estancias largas.</span></p>
+<a class="hotel-button" href="https://www.hilton.com/en/hotels/houcohw-homewood-suites-conroe/" target="_blank"><span class="english">View Hotel</span><span class="spanish">Ver Hotel</span></a>
+</div>
+<div class="hotel-card">
+<h3>Comfort Inn Conroe</h3>
+<p class="hotel-meta"><span class="english">🏨 ⭐ 2.0 stars • 1.4 miles from venue</span><span class="spanish">🏨 ⭐ 2.0 estrellas • 1.4 millas del lugar</span></p>
+<p class="hotel-description"><span class="english">A simple, budget-friendly option with free breakfast and easy access to I‑45.</span><span class="spanish">Opción sencilla y económica con desayuno gratis y fácil acceso a la I‑45.</span></p>
+<a class="hotel-button" href="https://www.choicehotels.com/texas/conroe/comfort-inn-hotels/txa06" target="_blank"><span class="english">View Hotel</span><span class="spanish">Ver Hotel</span></a>
+</div>
+<div class="hotel-card">
+<h3>Hotel elev8 Conroe</h3>
+<p class="hotel-meta"><span class="english">🏨 ⭐ 2.0 stars • 1.4 miles from venue</span><span class="spanish">🏨 ⭐ 2.0 estrellas • 1.4 millas del lugar</span></p>
+<p class="hotel-description"><span class="english">Essential amenities and updated decor in a minimalist, clean space.</span><span class="spanish">Amenidades esenciales y decoración moderna en un espacio minimalista y limpio.</span></p>
+<a class="hotel-button" href="https://hotelelev8.com/conroe" target="_blank"><span class="english">View Hotel</span><span class="spanish">Ver Hotel</span></a>
+</div>
+<div class="hotel-card">
+<h3>La Quinta Inn &amp; Suites by Wyndham Conroe</h3>
+<p class="hotel-meta"><span class="english">🏨 ⭐ 3.0 stars • 2.5 miles from venue</span><span class="spanish">🏨 ⭐ 3.0 estrellas • 2.5 millas del lugar</span></p>
+<p class="hotel-description"><span class="english">Reliable comfort with complimentary breakfast, pool access, and pet-friendly rooms.</span><span class="spanish">Comodidad confiable con desayuno incluido, acceso a piscina y habitaciones que admiten mascotas.</span></p>
+<a class="hotel-button" href="https://www.wyndhamhotels.com/laquinta/conroe-texas/la-quinta-inn-and-suites-conroe/overview" target="_blank"><span class="english">View Hotel</span><span class="spanish">Ver Hotel</span></a>
+</div>
+<div class="hotel-card">
+<h3>TownePlace Suites by Marriott Conroe</h3>
+<p class="hotel-meta"><span class="english">🏨 ⭐ 3.0 stars • 3.0 miles from venue</span><span class="spanish">🏨 ⭐ 3.0 estrellas • 3.0 millas del lugar</span></p>
+<p class="hotel-description"><span class="english">Spacious suites with full kitchens, ideal for longer stays with families or groups.</span><span class="spanish">Suites amplias con cocina completa, ideal para estancias largas en familia o grupo.</span></p>
+<a class="hotel-button" href="https://www.marriott.com/en-us/hotels/houto-towneplace-suites-conroe/overview/" target="_blank"><span class="english">View Hotel</span><span class="spanish">Ver Hotel</span></a>
+</div>
+<div class="hotel-card">
+<h3>Holiday Inn Express &amp; Suites Conroe</h3>
+<p class="hotel-meta"><span class="english">🏨 ⭐ 3.0 stars • 3.5 miles from venue</span><span class="spanish">🏨 ⭐ 3.0 estrellas • 3.5 millas del lugar</span></p>
+<p class="hotel-description"><span class="english">A modern, business-friendly option with complimentary hot breakfast and Wi-Fi.</span><span class="spanish">Opción moderna para negocios con desayuno caliente incluido y Wi‑Fi.</span></p>
+<a class="hotel-button" href="https://www.ihg.com/holidayinnexpress/hotels/us/en/conroe/crotx/hoteldetail" target="_blank"><span class="english">View Hotel</span><span class="spanish">Ver Hotel</span></a>
+</div>
+<div class="hotel-card">
+<h3>Margaritaville Lake Resort, Lake Conroe</h3>
+<p class="hotel-meta"><span class="english">🏨 ⭐ 4.0 stars • 10 miles from venue</span><span class="spanish">🏨 ⭐ 4.0 estrellas • 10 millas del lugar</span></p>
+<p class="hotel-description"><span class="english">Lakeside luxury with spa, water park, golf, restaurants, and beautiful scenic views.</span><span class="spanish">Lujo junto al lago con spa, parque acuático, golf, restaurantes y vistas espectaculares.</span></p>
+<a class="hotel-button" href="https://www.margaritavilleresorts.com/margaritaville-lake-resort-lake-conroe" target="_blank"><span class="english">View Hotel</span><span class="spanish">Ver Hotel</span></a>
+</div>
+<div class="hotel-card">
+<h3>Best Western Lake Conroe Inn</h3>
+<p class="hotel-meta"><span class="english">🏨 ⭐ 2.0 stars • 10.5 miles from venue</span><span class="spanish">🏨 ⭐ 2.0 estrellas • 10.5 millas del lugar</span></p>
+<p class="hotel-description"><span class="english">Budget-friendly stay with lake views, an outdoor pool, and complimentary breakfast.</span><span class="spanish">Estancia económica con vistas al lago, piscina al aire libre y desayuno incluido.</span></p>
+<a class="hotel-button" href="https://www.bestwestern.com/en_US/book/hotels-in-montgomery/best-western-lake-conroe-inn/propertyCode.44550.html" target="_blank"><span class="english">View Hotel</span><span class="spanish">Ver Hotel</span></a>
+</div>
+<div class="hotel-card">
+<h3>Holiday Inn Club Vacations Piney Shores Resort</h3>
+<p class="hotel-meta"><span class="english">🏨 ⭐ 3.0 stars • 11 miles from venue</span><span class="spanish">🏨 ⭐ 3.0 estrellas • 11 millas del lugar</span></p>
+<p class="hotel-description"><span class="english">Cabin-style resort with family-friendly amenities, lake access, and outdoor recreation.</span><span class="spanish">Resort estilo cabaña con amenidades familiares, acceso al lago y recreación al aire libre.</span></p>
+<a class="hotel-button" href="https://www.holidayinnclub.com/explore-resorts/piney-shores" target="_blank"><span class="english">View Hotel</span><span class="spanish">Ver Hotel</span></a>
+</div>
+</div>
+<!-- Map Right Column -->
+<div style="flex: 1 1 55%; min-width: 300px;">
+<iframe allowfullscreen="" height="600" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d79608.12653970812!2d-95.4654305089258!3d30.259508551899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sHotels!5e0!3m2!1sen!2sus!4v1744902782937!5m2!1sen!2sus" style="border:0; border-radius: 8px;" width="100%">
+</iframe>
+</div>
+</div>
+</section>
+<footer>
+<p><span class="english">© 2026 Micah &amp; Carolina. All rights reserved.</span><span class="spanish">Todos los derechos reservados.</span></p>
+</footer>
+<script src="lang-toggle.js"></script>
+</body>
+</html>

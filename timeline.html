@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html data-lang="en" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Timeline</title>
+  <link href="styles.css" rel="stylesheet" />
+  <!-- Optional: keep this if you want the toggle styles separated -->
+  <link href="lang-toggle.css" rel="stylesheet" />
+
+  <style>
+    /* Expandable captions (keeps long descriptions compact) */
+    .caption .more-text { display: none; }
+    .caption .ellipsis { display: inline; }
+    .caption.is-expanded .more-text { display: inline; }
+    .caption.is-expanded .ellipsis { display: none; }
+
+    .caption-toggle {
+      background: none;
+      border: none;
+      padding: 0;
+      margin-top: 6px;
+      cursor: pointer;
+      text-decoration: underline;
+      font: inherit;
+    }
+    .caption-toggle:focus {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+    }
+  </style>
+
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html"><span class="english">Home</span><span class="spanish">Inicio</span></a></li>
+      <li><a href="timeline.html"><span class="english">Timeline</span><span class="spanish">Cronología</span></a></li>
+      <li><a href="details.html"><span class="english">Event Details</span><span class="spanish">Detalles del Evento</span></a></li>
+      <li><a href="rsvp.html"><span class="english">RSVP</span><span class="spanish">Confirmación</span></a></li>
+      <li><a href="registry.html"><span class="english">Registry</span><span class="spanish">Registro</span></a></li>
+      <li><a href="travel.html"><span class="english">Travel</span><span class="spanish">Viajes</span></a></li>
+      <li><a href="contact.html"><span class="english">Contact</span><span class="spanish">Contacto</span></a></li>
+      <li>
+        <a href="gacha/gacha.html">
+          <img class="nav-icon" src="images/Item_Masterless_Starglitter.webp" alt="Gacha" />
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="lang-toggle-bar">
+    <button id="lang-toggle" class="lang-toggle" type="button" aria-label="Toggle language">ES</button>
+  </div>
+
+  <section class="container" id="timeline">
+    <h2>
+      <span class="english">Our Story Timeline</span>
+      <span class="spanish">Cronología de Nuestra Historia</span>
+    </h2>
+
+    <!-- Timeline list is generated from the spreadsheet-backed data below -->
+    <ul class="timeline" id="timeline-list"></ul>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div class="modal" id="image-modal" aria-hidden="true">
+    <span class="close" role="button" tabindex="0" aria-label="Close">×</span>
+    <img id="modal-img" src="" alt="Expanded view" />
+  </div>
+
+  <footer>
+    <p>
+      <span class="english">© 2026 Micah &amp; Carolina. All rights reserved.</span>
+      <span class="spanish">© 2026 Micah &amp; Carolina. Todos los derechos reservados.</span>
+    </p>
+  </footer>
+
+  <script>
+    // ===== Timeline data (generated from file_list.xlsx) =====
+    // Expect images at: images/timelinephotos/<filename>
+    const TIMELINE_IMAGE_BASE = "images/timelinephotos/";
+    const TIMELINE_DATA = [
+  {
+    "filename": "Cancun_012422.jpg",
+    "date": "2022-01-24",
+    "en": "Our first real trip was to Cancun! We somehow scraped up enough cash to make it over there and had a great time! It was Micah's first vacation in years! Side note: The taco place we were at in this picture was amazing. We laugh at this when we think back now, but we actually did not even have enough money for the bus ride back to our hotel so we had to walk!",
+    "es": "¡Nuestro primer viaje de verdad fue a Cancún! De alguna manera juntamos suficiente dinero para ir y la pasamos increíble. ¡Fue la primera vacaciones de Micah en años! Nota: el lugar de tacos de esta foto estaba buenísimo. Nos reímos al recordarlo, pero ni siquiera teníamos dinero para el camión de regreso al hotel… ¡así que caminamos!"
+  },
+  {
+    "filename": "CarolinaMedSchool_100122.jpg",
+    "date": "2022-10-01",
+    "en": "Carolina's White Coat Ceremony! This was just after she started her first year at UT Southwestern as a medical student.",
+    "es": "¡La Ceremonia de la Bata Blanca de Carolina! Fue justo después de empezar su primer año en UT Southwestern como estudiante de medicina."
+  },
+  {
+    "filename": "LeagueCityHouseChristmas_112522.jpg",
+    "date": "2022-11-25",
+    "en": "Of the few times Carolina was able to come back to the house where Micah spent a majority of his childhood, this was one of the more memorable. Not in frame here Is Carolina's laptop with her study materials.",
+    "es": "De las pocas veces que Carolina pudo volver a la casa donde Micah pasó gran parte de su infancia, esta fue una de las más memorables. Fuera de cuadro está la laptop de Carolina con sus materiales de estudio."
+  },
+  {
+    "filename": "DateNight_120922.jpg",
+    "date": "2022-12-09",
+    "en": "This is one of our early Dallas date pictures before Micah moved to Dallas officially! We can't remember what the name of the restaurant was… but hats off to Carolina for footing the bill on this! We both remember being surprised at those \"average\" Dallas prices.",
+    "es": "Una de nuestras primeras fotos de cita en Dallas antes de que Micah se mudara oficialmente. No recordamos el nombre del restaurante… pero mis respetos a Carolina por pagar la cuenta. ¡Nos sorprendieron esos precios “promedio” de Dallas!"
+  },
+  {
+    "filename": "Club_010723.jpg",
+    "date": "2023-01-07",
+    "en": "Here it is , ladies and gentlemen. The one and only picture of Micah preparing to go \"clubbing\".",
+    "es": "Aquí está, damas y caballeros: la única foto de Micah preparándose para ir de “antro”."
+  },
+  {
+    "filename": "NapaliWedding_022623.jpg",
+    "date": "2023-02-26",
+    "en": "The first \"plus-one\" experience is always a step in any relationship. For us, the first wedding we attended as a couple was held by one of Micah's lab mates from Nepal. This event helped Micah and Carolina discover that their view of what a \"party\" looked like very much inside the box.",
+    "es": "La primera experiencia de ir como “acompañante” a un evento siempre es un paso en cualquier relación. Para nosotros, la primera boda a la que fuimos como pareja fue de un compañero de laboratorio de Micah de Nepal. Ese día Micah y Carolina descubrieron que su idea de lo que era una “fiesta” estaba… bastante dentro de la caja."
+  },
+  {
+    "filename": "TSwift_040223.jpg",
+    "date": "2023-04-02",
+    "en": "From the moment we met, the teachings of Taylor Swift have been slowly ingrained into Micah's subconcious. We were finally able to see her in the Dallas showing of the \"Eras Tour\"! Without a doubt, Micah enjoyed this concert more than anyone in their group.",
+    "es": "Desde que nos conocimos, las enseñanzas de Taylor Swift se han ido grabando lentamente en el subconsciente de Micah. Por fin pudimos verla en la presentación de Dallas del “Eras Tour”. Sin duda, ¡Micah disfrutó este concierto más que nadie en el grupo!"
+  },
+  {
+    "filename": "FestivaldeSalud_042223.jpg",
+    "date": "2023-04-22",
+    "en": "El Festival de Salud is a volunteering event that Carolina and her organization at UT Southwestern organize each year to benefit the local Dallas community through free health fairs and fun activities for kids. This was our first volunteering event together!",
+    "es": "El Festival de Salud es un evento de voluntariado que Carolina y su organización en UT Southwestern organizan cada año para apoyar a la comunidad de Dallas con ferias de salud gratuitas y actividades divertidas para niños. ¡Fue nuestro primer voluntariado juntos!"
+  },
+  {
+    "filename": "HugeTank_050623.jpg",
+    "date": "2023-05-06",
+    "en": "It was at this moment that Carolina knew, Micah's future aquarium plans could get much, MUCH bigger.",
+    "es": "Fue en ese momento cuando Carolina supo que los planes futuros de acuario de Micah podían volverse MUCHO, muchísimo más grandes."
+  },
+  {
+    "filename": "FirstHike_081923.jpg",
+    "date": "2023-08-19",
+    "en": "This was one of our first hikes! Carolina doesn't know it yet at this point in time, but she is being trained.",
+    "es": "¡Una de nuestras primeras caminatas! Carolina todavía no lo sabe en este punto… pero la están entrenando."
+  },
+  {
+    "filename": "Carolina25th_092023.jpg",
+    "date": "2023-09-20",
+    "en": "Carolina's 25th Birthday! She always makes those events special!",
+    "es": "¡El cumpleaños número 25 de Carolina! ¡Siempre hace que esos momentos sean especiales!"
+  },
+  {
+    "filename": "DallasMNS_100723.jpg",
+    "date": "2023-10-07",
+    "en": "The Perot Museum of Nature and Science was always a place we had wanted to go when driving around the city after first moving to Dallas… needless to say, we <3 it!",
+    "es": "El Museo Perot de Naturaleza y Ciencia siempre fue un lugar que queríamos visitar cuando manejábamos por la ciudad después de mudarnos a Dallas… y sí: ¡nos encanta!"
+  },
+  {
+    "filename": "Halloween_102723.jpg",
+    "date": "2023-10-27",
+    "en": "Ms. Frizzle and Bill Nye!",
+    "es": "¡La Sra. Frizzle y Bill Nye!"
+  },
+  {
+    "filename": "PhD_110623.jpg",
+    "date": "2023-11-06",
+    "en": "Surpisingly, this is one of the only pictures we have of the night Micah defended his PhD. The sushi was great!",
+    "es": "Sorprendentemente, esta es una de las pocas fotos que tenemos de la noche en que Micah defendió su doctorado. ¡El sushi estuvo increíble!"
+  },
+  {
+    "filename": "DallasMove_120923.jpg",
+    "date": "2023-12-09",
+    "en": "This picture was taken practically the first night after Micah had moved to Dallas. That is the face of someone who no longer has to worry about food the next day.",
+    "es": "Esta foto fue tomada prácticamente la primera noche después de que Micah se mudó a Dallas. Esa es la cara de alguien que por fin ya no tiene que preocuparse por la comida del día siguiente."
+  },
+  {
+    "filename": "NonBrokeNewYears_123123.jpg",
+    "date": "2023-12-31",
+    "en": "This is the first new years after PhD life completed for Micah! Look how relaxed that face is.",
+    "es": "¡Este fue el primer Año Nuevo después de terminar la vida de doctorado para Micah! Mira esa cara de relajación."
+  },
+  {
+    "filename": "NY_032924.jpg",
+    "date": "2024-03-29",
+    "en": "This is our first vacation after Micah got his first job! New York was a blast!",
+    "es": "¡Nuestras primeras vacaciones después de que Micah consiguió su primer trabajo! ¡Nueva York fue una locura (en el mejor sentido)!"
+  },
+  {
+    "filename": "FirstEclipse_040824.jpg",
+    "date": "2024-04-08",
+    "en": "Our first eclipse together! With many more to come!",
+    "es": "¡Nuestro primer eclipse juntos! ¡Y muchos más por venir!"
+  },
+  {
+    "filename": "Eclipse_040824.jpg",
+    "date": "2024-04-08",
+    "en": "For those wondering whether we got a good picture of the eclipse...",
+    "es": "Para quienes se preguntaban si logramos una buena foto del eclipse…"
+  },
+  {
+    "filename": "FestivalDeSalud2_041324.jpg",
+    "date": "2024-04-13",
+    "en": "We loved it so much the first year we came back for more! El Festival de Salud, Year 2!",
+    "es": "Nos gustó tanto el primer año que regresamos por más: ¡Festival de Salud, año 2!"
+  },
+  {
+    "filename": "NotableHikeDistance2_082524.jpg",
+    "date": "2024-08-25",
+    "en": "On one of the hikes we took, we found this cool lake where we tried skipping rocks! After about 5 miles, Carolina began to realize she was being trained for something in the future.",
+    "es": "En una de las caminatas que hicimos, encontramos este lago genial donde intentamos lanzar piedritas. Después de unas 5 millas, Carolina empezó a darse cuenta de que la estaban entrenando para algo en el futuro."
+  },
+  {
+    "filename": "Uchiba1_100924.jpg",
+    "date": "2024-10-09",
+    "en": "This was our 3 year anniversary! Uchiba in Dallas, TX is one of our favorite \"celebratory\" places to eat!",
+    "es": "¡Nuestro tercer aniversario! Uchiba en Dallas, TX es uno de nuestros lugares favoritos para celebrar."
+  },
+  {
+    "filename": "DallasArbor_111524.jpg",
+    "date": "2024-11-15",
+    "en": "The Dallas Arboretum's \"Holiday at the Arboretum\" is an amazing sight to behold! Would defintiely recommend going if you are in Dallas around Christmas time.",
+    "es": "“Holiday at the Arboretum” en el Arboreto de Dallas es algo increíble de ver. Súper recomendado si estás en Dallas cerca de Navidad."
+  },
+  {
+    "filename": "SheDoesntKnow_121424.jpg",
+    "date": "2024-12-14",
+    "en": "She has no idea what it about to happen….",
+    "es": "Ella no tiene idea de lo que está a punto de pasar…"
+  },
+  {
+    "filename": "SheKnowsNow_121424.jpg",
+    "date": "2024-12-14",
+    "en": "She knows now! This was the night of our engagement! We had a wonderful walk around Vail village, we ate some amazing food, then we travelled south a bit to a ridge that was out of the way of city lights to see a meteor shower! At least… that was the plan. The weather had other ideas and visibilty was a bit lower than Micah had hoped for. However, the full moon brightly illuminated the cold, white snow as they hiked up a mountain in the dark. After traveling far enough to begin thinking \"will we be mauled by a bear\", Micah started to walk up the mountainside to what looked like a path in the dark overlooking the valley. We made it about ten steps up the hill before falling a few feet into the snow and.... getting engaged!",
+    "es": "¡Ya lo sabe! Esa fue la noche de nuestro compromiso. Dimos una caminata preciosa por Vail Village, comimos delicioso y luego viajamos un poco hacia el sur hasta una cresta lejos de las luces de la ciudad para ver una lluvia de meteoros. O bueno… ese era el plan. El clima tenía otras ideas y la visibilidad fue menor de lo que Micah esperaba. Aun así, la luna llena iluminaba la nieve fría y blanca mientras subíamos una montaña en la oscuridad. Después de caminar lo suficiente como para empezar a pensar “¿nos va a atacar un oso?”, Micah se desvió por la ladera hacia lo que parecía un sendero oscuro con vista al valle. Subimos como diez pasos antes de hundirnos unos cuantos pies en la nieve y… ¡comprometernos!"
+  },
+  {
+    "filename": "LoveIsBlind_121524.jpg",
+    "date": "2024-12-15",
+    "en": "They say \"Love is Blind\". No truer have those words ever been spoken than when Carolina was somehow convinced to ski for this first time without contacts or glasses. She is happy to report that she never fell a single time. Micah is unable to make the same claim.",
+    "es": "Dicen que “el amor es ciego”. Nunca había sido tan cierto como cuando Carolina fue convencida de esquiar por primera vez sin lentes de contacto ni lentes. Ella está feliz de reportar que no se cayó ni una sola vez. Micah no puede decir lo mismo."
+  },
+  {
+    "filename": "RingShow_121625.jpg",
+    "date": "2024-12-16",
+    "en": "Of the many pictures we have taken of the ring, this is perhaps one of our favorites.",
+    "es": "De las muchas fotos que hemos tomado del anillo, esta es quizás una de nuestras favoritas."
+  },
+  {
+    "filename": "WentBack_121824.jpg",
+    "date": "2024-12-18",
+    "en": "We had to go back to the spot we got engaged in the day time! Micah was surprised we were able to make it out that far considering how dark it was the night of our engagement!",
+    "es": "Tuvimos que volver de día al lugar donde nos comprometimos. A Micah le sorprendió que hubiéramos llegado tan lejos, considerando lo oscuro que estaba la noche del compromiso."
+  },
+  {
+    "filename": "FirstSnowMan_121824.jpg",
+    "date": "2024-12-18",
+    "en": "A picture of us with our first snow man!",
+    "es": "¡Una foto de nosotros con nuestro primer muñeco de nieve!"
+  },
+  {
+    "filename": "LifePlanningConference_121824.jpg",
+    "date": "2024-12-18",
+    "en": "After our engagement, we spent several hours near the fire looking at the ski slopes in Vail, Colorado talking about future plans.",
+    "es": "Después del compromiso, pasamos varias horas junto al fuego mirando las pistas de esquí en Vail, Colorado, hablando de planes para el futuro."
+  },
+  {
+    "filename": "FrozenLake_121924.jpg",
+    "date": "2024-12-19",
+    "en": "Our vows will likely include something about \"sickness and health\". Thankfully, I think there is subtext in there for \"dumb ideas and smart ideas\" as well. We are standing on a frozen lake because Micah wanted to walk on it.",
+    "es": "Nuestros votos probablemente incluirán algo sobre “en la salud y en la enfermedad”. Por suerte, creo que también hay un subtexto para “ideas tontas e ideas inteligentes”. Estamos parados sobre un lago congelado porque Micah quería caminar sobre él."
+  },
+  {
+    "filename": "Intero2_040225.jpg",
+    "date": "2025-04-02",
+    "en": "We love Intero in Austin,TX so much! If you have never been, it is a 10/10 restaurant for both of us!",
+    "es": "¡Nos encanta tanto Intero en Austin, TX! Si nunca has ido, para nosotros es un restaurante 10/10."
+  },
+  {
+    "filename": "JetSkiSD_053125.jpg",
+    "date": "2025-05-31",
+    "en": "Relationships are all about trust. In this picture, Carolina is trusting Micah to not flip their jet ski in the San Diego bay.",
+    "es": "Las relaciones se tratan de confianza. En esta foto, Carolina confía en que Micah no volteará la moto acuática en la bahía de San Diego."
+  },
+  {
+    "filename": "SDView_060125.jpg",
+    "date": "2025-06-01",
+    "en": "Our trip to San Diego ended with an amazing dinner overlooking the skyline and the bay!",
+    "es": "Nuestro viaje a San Diego terminó con una cena increíble con vista al skyline y la bahía."
+  },
+  {
+    "filename": "SpareChild_070925.jpg",
+    "date": "2025-07-09",
+    "en": "Every couple has a \"practice round\" for what is to come. Maybe a fish, a dog, a cat… we have an Alice.",
+    "es": "Cada pareja tiene una “prueba” para lo que viene. Tal vez un pez, un perro, un gato… nosotros tenemos a Alice."
+  },
+  {
+    "filename": "DSO_121625.jpg",
+    "date": "2025-12-16",
+    "en": "Dallas Symphony Orchestra's \"Brazzy Christmas\", courtesy of our friends with significantly more class than us.",
+    "es": "‘Brazzy Christmas’ de la Orquesta Sinfónica de Dallas, cortesía de unos amigos con mucha más clase que nosotros."
+  },
+];
+
+    // Sort by date ascending (YYYY-MM-DD)
+    TIMELINE_DATA.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+
+    // Caption truncation length (characters). Increase/decrease to taste.
+    const CAPTION_CUTOFF = 170;
+
+    function createCaptionSpan(text, langClass) {
+      const outer = document.createElement("span");
+      outer.className = langClass;
+
+      const t = (text || "").trim();
+      if (!t) return outer;
+
+      if (t.length <= CAPTION_CUTOFF) {
+        outer.textContent = t;
+        outer.dataset.needsToggle = "0";
+        return outer;
+      }
+
+      // Prefer cutting on a word boundary
+      let cut = t.lastIndexOf(" ", CAPTION_CUTOFF);
+      if (cut < Math.floor(CAPTION_CUTOFF * 0.6)) cut = CAPTION_CUTOFF;
+
+      const previewText = t.slice(0, cut).trimEnd();
+      const moreText = t.slice(cut);
+
+      const preview = document.createElement("span");
+      preview.className = "preview-text";
+      preview.textContent = previewText;
+
+      const ellipsis = document.createElement("span");
+      ellipsis.className = "ellipsis";
+      ellipsis.textContent = "… ";
+
+      const more = document.createElement("span");
+      more.className = "more-text";
+      more.textContent = moreText;
+
+      outer.appendChild(preview);
+      outer.appendChild(ellipsis);
+      outer.appendChild(more);
+
+      outer.dataset.needsToggle = "1";
+      return outer;
+    }
+
+    function updateCaptionToggleLabels(p, btn) {
+      const expanded = p.classList.contains("is-expanded");
+      btn.setAttribute("aria-expanded", expanded ? "true" : "false");
+
+      const en = btn.querySelector(".english");
+      const es = btn.querySelector(".spanish");
+      if (en) en.textContent = expanded ? "Read less" : "Read more";
+      if (es) es.textContent = expanded ? "Leer menos" : "Leer más";
+    }
+
+
+    function currentLang() {
+      return document.documentElement.getAttribute("data-lang") === "es" ? "es" : "en";
+    }
+
+    function formatDateForLang(dateISO, lang) {
+      const d = new Date(dateISO + "T00:00:00");
+      const locale = lang === "es" ? "es-ES" : "en-US";
+      return new Intl.DateTimeFormat(locale, {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      }).format(d);
+    }
+
+    function buildTimeline() {
+      const list = document.getElementById("timeline-list");
+      list.innerHTML = "";
+
+      TIMELINE_DATA.forEach((item) => {
+        const li = document.createElement("li");
+        li.className = "timeline-item";
+
+        const content = document.createElement("div");
+        content.className = "content";
+
+        const img = document.createElement("img");
+        img.className = "timeline-img";
+        img.src = TIMELINE_IMAGE_BASE + item.filename;
+
+        // Keep alt reasonably descriptive, but bilingual-friendly
+        img.alt = currentLang() === "es" ? "Foto" : "Photo";
+
+        // Lightbox
+        img.style.cursor = "pointer";
+        img.addEventListener("click", () => {
+          const modal = document.getElementById("image-modal");
+          const modalImg = document.getElementById("modal-img");
+          modalImg.src = img.src;
+          modal.classList.add("show");
+          modal.setAttribute("aria-hidden", "false");
+        });
+
+        const h3 = document.createElement("h3");
+        h3.className = "timeline-date";
+        h3.dataset.date = item.date;
+        h3.textContent = formatDateForLang(item.date, currentLang());
+
+        const p = document.createElement("p");
+        p.className = "caption";
+
+        const spanEn = createCaptionSpan(item.en, "english");
+        const spanEs = createCaptionSpan(item.es, "spanish");
+
+        p.appendChild(spanEn);
+        p.appendChild(spanEs);
+
+        // Add a single bilingual toggle only if either language needs truncation
+        const needsToggle = (spanEn.dataset.needsToggle === "1") || (spanEs.dataset.needsToggle === "1");
+        if (needsToggle) {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "caption-toggle";
+          btn.setAttribute("aria-expanded", "false");
+
+          const btnEn = document.createElement("span");
+          btnEn.className = "english";
+          btnEn.textContent = "Read more";
+
+          const btnEs = document.createElement("span");
+          btnEs.className = "spanish";
+          btnEs.textContent = "Leer más";
+
+          btn.appendChild(btnEn);
+          btn.appendChild(btnEs);
+
+          btn.addEventListener("click", () => {
+            p.classList.toggle("is-expanded");
+            updateCaptionToggleLabels(p, btn);
+          });
+
+          // Ensure correct initial label state
+          updateCaptionToggleLabels(p, btn);
+
+          p.appendChild(btn);
+        }
+
+        content.appendChild(img);
+        content.appendChild(h3);
+        content.appendChild(p);
+
+        li.appendChild(content);
+        list.appendChild(li);
+      });
+    }
+
+    function refreshDatesAndAlts() {
+      const lang = currentLang();
+      document.querySelectorAll(".timeline-date").forEach((el) => {
+        const dateISO = el.dataset.date;
+        el.textContent = formatDateForLang(dateISO, lang);
+      });
+      document.querySelectorAll(".timeline-img").forEach((img) => {
+        img.alt = lang === "es" ? "Foto" : "Photo";
+      });
+
+      // Browser tab title (simple + clean)
+      document.title = lang === "es" ? "Cronología" : "Timeline";
+    }
+
+    // Close lightbox
+    function closeModal() {
+      const modal = document.getElementById("image-modal");
+      modal.classList.remove("show");
+      modal.setAttribute("aria-hidden", "true");
+    }
+
+    document.addEventListener("click", (e) => {
+      if (e.target && e.target.classList && e.target.classList.contains("close")) {
+        closeModal();
+      }
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+
+    // Initial render
+    buildTimeline();
+
+    // Watch language changes from lang-toggle.js (data-lang attribute flips on <html>)
+    const observer = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        if (m.type === "attributes" && m.attributeName === "data-lang") {
+          refreshDatesAndAlts();
+        }
+      }
+    });
+    observer.observe(document.documentElement, { attributes: true });
+
+    // Also set correct title on first load
+    refreshDatesAndAlts();
+  </script>
+
+  <!-- Your existing language toggle logic -->
+  <script src="lang-toggle.js"></script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html data-lang="en" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title><span class="english">RSVP</span><span class="spanish">Confirmación</span></title>
+<link href="styles.css" rel="stylesheet"/>
+<style>
+/* Center the language toggle bar */
+.lang-toggle-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  box-sizing: border-box;
+}
+</style><style>
+/* Language visibility rules (symmetric) */
+html[data-lang="en"] .spanish { display: none !important; }
+html[data-lang="es"] .english { display: none !important; }
+</style></head>
+<body>
+<nav>
+<ul>
+<li><a href="index.html"><span class="english">Home</span><span class="spanish">Inicio</span></a></li>
+<li><a href="timeline.html"><span class="english">Timeline</span><span class="spanish">Cronología</span></a></li>
+<li><a href="details.html"><span class="english">Event Details</span><span class="spanish">Detalles del Evento</span></a></li>
+<li><a href="rsvp.html"><span class="english">RSVP</span><span class="spanish">Confirmación</span></a></li>
+<li><a href="registry.html"><span class="english">Registry</span><span class="spanish">Registro</span></a></li>
+<li><a href="travel.html"><span class="english">Travel</span><span class="spanish">Viajes</span></a></li>
+<li><a href="contact.html"><span class="english">Contact</span><span class="spanish">Contacto</span></a></li>
+<li>
+<a href="gacha/gacha.html">
+<img class="nav-icon" src="images/Item_Masterless_Starglitter.webp"/>
+</a>
+</li>
+</ul>
+</nav><div class="lang-toggle-bar"><button aria-label="Toggle language" class="lang-toggle" id="lang-toggle" type="button">ES</button></div>
+<section class="container" id="rsvp">
+<h2><span class="english">RSVP</span><span class="spanish">Confirmación</span></h2>
+<form action="https://script.google.com/macros/s/AKfycbxSx3BXgQd_6q42-i-IPi7YudkQkpll-xxaud1RV521CPeK-pHuSxpW41lxIQdHxdp3/exec" id="WeddingForm" method="POST">
+<!-- Guest Info -->
+<label for="guestName"><span class="english">Full Name</span><span class="spanish">Nombre Completo</span></label>
+<input data-i18n-en="Your Full Name" data-i18n-es="Tu nombre completo" id="guestName" name="guestName" placeholder="Your Full Name" required="" type="text"/>
+<label for="guestEmail"><span class="english">Email Address</span><span class="spanish">Correo Electrónico</span></label>
+<input data-i18n-en="you@example.com" data-i18n-es="tu@correo.com" id="guestEmail" name="guestEmail" placeholder="you@example.com" required="" type="email"/>
+<label for="guestPhone"><span class="english">Phone Number</span><span class="spanish">Número de Teléfono</span></label>
+<input id="guestPhone" name="guestPhone" placeholder="(123) 456‑7890 " type="tel"/>
+<!-- Attendance -->
+<fieldset>
+<legend><span class="english">Will you attend?</span><span class="spanish">¿Asistirás?</span></legend>
+<label>
+<input name="attendance" required="" type="radio" value="yes"/><span class="english">Yes, happily!</span><span class="spanish">¡Sí, con gusto!</span></label>
+<label>
+<input name="attendance" type="radio" value="no"/><span class="english">No, regretfully.</span><span class="spanish">No, lamentablemente.</span></label>
+</fieldset>
+<!-- +1 Checkbox -->
+<label>
+<input id="plusOneCheckbox" name="plusOne" type="checkbox"/><span class="english">I’d like to bring a guest (+1)</span><span class="spanish">Me gustaría llevar un acompañante (+1)</span></label>
+<!-- +1 Fields -->
+<div id="plusOneFields" style="display:none; margin:1rem 0 1rem 1rem; border-left:2px solid #ddd; padding-left:1rem;">
+<label for="plusOneName"><span class="english">Guest’s Full Name</span><span class="spanish">Nombre Completo del Acompañante</span></label>
+<input data-i18n-en="Plus‑one full name" data-i18n-es="Nombre del acompañante" id="plusOneName" name="plusOneName" placeholder="Plus‑one full name" type="text"/>
+</div>
+<!-- Children Checkbox -->
+<label>
+<input id="childrenCheckbox" name="children" type="checkbox"/><span class="english">I will be bringing children</span><span class="spanish">Llevaré niños</span></label>
+<!-- Children Fields -->
+<div id="childrenFields" style="display:none; margin:1rem 0 1rem 1rem; border-left:2px solid #ddd; padding-left:1rem;">
+<label for="childrenNames"><span class="english">Children’s Names</span><span class="spanish">Nombres de los Niños</span></label>
+<input id="childrenNames" name="childrenNames" placeholder="Umisleidy, Naruto... " type="text"/>
+</div>
+<!-- Optional Extras -->
+<label for="song"><span class="english">Song Request</span><span class="spanish">Solicitud de Canción</span></label>
+<input data-i18n-en="A song you'd love to hear" data-i18n-es="Una canción que te gustaría escuchar" id="song" name="song" placeholder="A song you'd love to hear" type="text"/>
+
+<!-- Favorite Memory -->
+<label for="favoriteMemory">
+  <span class="english">Favorite Memory with the Bride or Groom</span>
+  <span class="spanish">Recuerdo favorito con la novia o el novio</span>
+</label>
+<textarea
+  id="favoriteMemory"
+  name="favoriteMemory"
+  rows="3"
+  data-i18n-en="Share a favorite moment or story"
+  data-i18n-es="Comparte un momento o historia favorita"
+  placeholder="Share a favorite moment or story"
+></textarea>
+
+<label for="comments"><span class="english">Additional Comments</span><span class="spanish">Comentarios Adicionales</span></label>
+<textarea data-i18n-en="Any other notes for us" data-i18n-es="Cualquier otra nota para nosotros" id="comments" name="comments" placeholder="Any other notes for us" rows="3">
+      </textarea>
+<input name="_subject" type="hidden" value="Wedding RSVP"/>
+<button type="submit"><span class="english">Submit RSVP</span><span class="spanish">Enviar Confirmación</span></button>
+
+<div id="rsvpStatus" aria-live="polite" style="display:none; margin-top:1rem; padding:0.75rem; border-radius:8px; background:#f0fff4; border:1px solid #b7ebc6; font-weight:600;">
+  <span class="english">RSVP received — thank you!</span>
+  <span class="spanish">¡Confirmación recibida — gracias!</span>
+</div>
+
+</form>
+</section>
+<footer>
+<p><span class="english">© 2026 Micah &amp; Carolina. All rights reserved.</span><span class="spanish">Todos los derechos reservados.</span></p>
+</footer>
+<script>
+    // Toggle +1 fields
+    const plusOneCheckbox = document.getElementById('plusOneCheckbox');
+    const plusOneFields   = document.getElementById('plusOneFields');
+    plusOneCheckbox.addEventListener('change', () => {
+      plusOneFields.style.display = plusOneCheckbox.checked ? 'block' : 'none';
+      document.getElementById('plusOneName').required = plusOneCheckbox.checked;
+    });
+
+    // Toggle Children fields
+    const childrenCheckbox = document.getElementById('childrenCheckbox');
+    const childrenFields   = document.getElementById('childrenFields');
+    childrenCheckbox.addEventListener('change', () => {
+      childrenFields.style.display = childrenCheckbox.checked ? 'block' : 'none';
+      document.getElementById('childrenNames').required = childrenCheckbox.checked;
+    });
+  </script>
+
+<script>
+// --- Placeholder i18n sync (EN/ES) ---
+(function() {
+  function updatePlaceholders() {
+    var lang = document.documentElement.getAttribute('data-lang') || 'en';
+    var fields = document.querySelectorAll('input[data-i18n-en], textarea[data-i18n-en]');
+    fields.forEach(function(el) {
+      var text = el.getAttribute('data-i18n-' + lang);
+      if (text) el.setAttribute('placeholder', text);
+    });
+  }
+  // run on load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updatePlaceholders);
+  } else { updatePlaceholders(); }
+  // run on language changes
+  var root = document.documentElement;
+  new MutationObserver(function(muts){
+    for (var i=0;i<muts.length;i++) {
+      if (muts[i].type === 'attributes' && muts[i].attributeName === 'data-lang') {
+        updatePlaceholders();
+        break;
+      }
+    }
+  }).observe(root, { attributes: true });
+})();
+</script>
+
+
+<script>
+(function() {
+  const form = document.getElementById('WeddingForm');
+  const status = document.getElementById('rsvpStatus');
+  if (!form) return;
+  form.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    if (status) { status.style.display = 'none'; }
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+      let data = {};
+      try { data = await res.json(); } catch(_) {}
+      if (res.ok && (data.ok === true || Object.keys(data).length === 0)) {
+        if (status) {
+          status.style.display = 'block';
+          status.style.background = '#f0fff4';
+          status.style.borderColor = '#b7ebc6';
+          status.innerHTML = '<span class="english">RSVP received — thank you!</span><span class="spanish">¡Confirmación recibida — gracias!</span>';
+        }
+        form.reset();
+        const plusOneFields = document.getElementById('plusOneFields');
+        const childrenFields = document.getElementById('childrenFields');
+        if (plusOneFields) plusOneFields.style.display = 'none';
+        if (childrenFields) childrenFields.style.display = 'none';
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (e) {
+      if (status) {
+        status.style.display = 'block';
+        status.style.background = '#fff5f5';
+        status.style.borderColor = '#fecaca';
+        status.innerHTML = '<span class="english">There was a problem submitting your RSVP. Please try again.</span><span class="spanish">Hubo un problema al enviar tu confirmación. Intenta de nuevo.</span>';
+      } else {
+        alert('Submission failed.');
+      }
+    }
+  });
+})();
+</script>
+
+<script src="lang-toggle.js"></script>
+</body>
+</html>

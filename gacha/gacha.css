@@ -1,0 +1,518 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap');
+
+body { background: transparent !important; }
+
+
+/* in gacha.css */
+
+
+  nav ul {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    overflow-x: auto;
+  }
+  
+  
+nav {
+  background: #f8f8f8;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
+nav li { margin: 0 15px; }
+nav a {
+  color: #a23f3f;
+  text-decoration: none;
+}
+nav a:hover { text-decoration: underline; }
+
+
+.gacha-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gacha-container > button {
+    /* let the button size itself, but enforce a minimum so it's always big enough */
+    display: inline-block;
+    min-width: 260px;
+    margin: 10px auto;
+    background-color: #a23f3f;
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;    /* extra horizontal padding */
+    font-size: 1.25rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    white-space: nowrap;     /* keep text on one line */
+  }
+  
+.gacha-container > button:hover {
+  background-color: #861f1f;
+}
+
+#resultCard {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: 20px;
+  display: inline-block;
+  transition: all 0.5s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0,0,0,0.2);
+}
+
+#photoCard {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  margin-top: 1rem;
+  z-index: 1;
+  position: relative;
+}
+
+.rarity-label {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  z-index: 2;
+  position: relative;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Rarity background effects */
+#resultCard::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.6;
+  z-index: 0;
+  pointer-events: none;
+  animation: shimmerSpin 3s linear infinite;
+}
+.common-style::before    { background-image: url('https://i.imgur.com/Z9bK0Pb.png'); }
+.rare-style::before      { background-image: url('https://i.imgur.com/jQl5ftz.gif'); }
+.ultra-style::before     { background-image: url('https://i.imgur.com/f2c1bNB.gif'); }
+.legendary-style::before { background-image: url('https://i.imgur.com/FJbG26X.gif'); opacity: 0.8; }
+
+@keyframes shimmerSpin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Reveal animation (fallback) */
+@keyframes memoryReveal {
+  0%   { opacity: 0; transform: scale(0.85) translateY(50px) rotate(-10deg); }
+  50%  { opacity: 1; transform: scale(1.05) translateY(-10px) rotate(3deg); }
+  100% { transform: scale(1) translateY(0) rotate(0deg); }
+}
+#resultCard.animate {
+  animation: memoryReveal 0.8s ease-out;
+}
+
+/* ─── Slide‑Up Variants by Rarity ─── */
+@keyframes slideUpSmall {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+@keyframes slideUpMedium {
+  from { transform: translateY(50px) rotate(-1deg); opacity: 0; }
+  to   { transform: translateY(0) rotate(0); opacity: 1; }
+}
+@keyframes slideUpBounce {
+  0%   { transform: translateY(80px); opacity: 0; }
+  60%  { transform: translateY(-10px); opacity: 1; }
+  100% { transform: translateY(0);     opacity: 1; }
+}
+
+/* Rare & Ultra share medium */
+.rarity-common    { animation: slideUpSmall   0.5s ease-out forwards; }
+.rarity-rare      { animation: slideUpMedium  0.8s cubic-bezier(0.25,1.25,0.5,1) forwards; }
+.rarity-ultra     { animation: slideUpMedium  0.8s cubic-bezier(0.25,1.25,0.5,1) forwards; }
+.rarity-legendary { animation: slideUpBounce  1s ease forwards; }
+
+/* Gallery styling unchanged… */
+#gallery { margin-top: 2rem; text-align: center; }
+#galleryGrid {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 1rem;
+}
+.gallery-item {
+  position: relative; width: 100px;
+}
+.gallery-item img {
+  width: 100px; height: 100px; object-fit: cover; border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15); transition: transform 0.2s ease;
+}
+.gallery-item img:hover { transform: scale(1.05); }
+.badge {
+  position: absolute; top: -6px; right: -6px; background-color: #ffd700;
+  color: black; font-size: 10px; padding: 2px 6px; border-radius: 8px;
+  font-weight: bold; text-transform: uppercase; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.highlight { animation: pulse 1s ease-out; }
+.download-btn {
+  margin-top: 4px; font-size: 10px; background: #a23f3f; color: white; border: none;
+  padding: 3px 6px; border-radius: 4px; cursor: pointer;
+}
+.download-btn:hover { background-color: #861f1f; }
+
+nav a .nav-icon {
+    width: 24px;     /* pick whatever size you like */
+    height: auto;
+    vertical-align: middle;
+  }
+
+  
+
+/* ==== Facelift Additions ==== */
+
+body { background: transparent !important; }
+
+#gachaButton {
+  position: relative;
+  background: linear-gradient(135deg, #a23f3f, #c85c5c);
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(162,63,63,0.3);
+}
+#gachaButton::after {
+  content: "";
+  position: absolute;
+  top: -150%; left: -50%;
+  width: 200%; height: 400%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 40%);
+  transform: rotate(25deg);
+  animation: btnShine 3s linear infinite;
+  pointer-events: none;
+}
+@keyframes btnShine {
+  0%   { transform: translateX(-60%) rotate(25deg); }
+  100% { transform: translateX(60%)  rotate(25deg); }
+}
+#gachaButton:hover {
+  box-shadow: 0 12px 28px rgba(162,63,63,0.38);
+}
+
+#resultCard {
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.75);
+  isolation: isolate;
+}
+#resultCard::after {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: 20px;
+  padding: 2px;
+  background: conic-gradient(from 0deg, #ff9a9e, #fad0c4, #a18cd1, #fbc2eb, #ff9a9e);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  animation: spinBorder 6s linear infinite;
+  z-index: 1; pointer-events: none;
+}
+@keyframes spinBorder { to { transform: rotate(1turn); } }
+
+.common-style    { box-shadow: 0 0 28px rgba(120,120,120,0.25); }
+.rare-style      { box-shadow: 0 0 34px rgba(80,140,255,0.45); }
+.ultra-style     { box-shadow: 0 0 40px rgba(255,120,220,0.55); }
+.legendary-style { box-shadow: 0 0 50px rgba(255,215,0,0.7); }
+
+.rarity-label { 
+  display:inline-block; padding: 6px 12px; border-radius: 999px;
+  background: rgba(255,255,255,0.75); backdrop-filter: blur(3px);
+  letter-spacing: .4px;
+}
+.common-style    .rarity-label { color: #666; }
+.rare-style      .rarity-label { color: #2f66ff; }
+.ultra-style     .rarity-label { color: #c12faa; }
+.legendary-style .rarity-label { color: #b8860b; font-weight: 700; }
+
+.shine {
+  content:""; position:absolute; top:0; left:-150%; width: 60%;
+  height:100%; background: linear-gradient(115deg, rgba(255,255,255,0) 0%,
+    rgba(255,255,255,.55) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-15deg);
+  filter: blur(1px);
+  animation: shineAcross 1.2s ease-out forwards;
+  z-index: 3; pointer-events:none;
+}
+@keyframes shineAcross { to { left: 130%; } }
+
+.flash {
+  position: fixed; inset: 0; background: radial-gradient(circle at 50% 45%, rgba(255,255,200,0.65), rgba(255,255,200,0) 60%);
+  mix-blend-mode: screen; pointer-events: none; animation: flashOut 900ms ease-out forwards; z-index: 99999;
+}
+@keyframes flashOut { from { opacity: 0.95; } to { opacity: 0; } }
+
+.confetti {
+  position: fixed;
+  width: 8px; height: 14px;
+  top: -20px; left: 50%;
+  border-radius: 2px;
+  transform: translateX(-50%);
+  opacity: 0;
+  z-index: 9999;
+  animation: confettiFall linear forwards;
+}
+@keyframes confettiFall {
+  0%   { opacity: 0; transform: translate3d(var(--x,0), -30px, 0) rotate(0deg); }
+  10%  { opacity: 1; }
+  100% { transform: translate3d(var(--x,0), 110vh, 0) rotate(720deg); opacity: 0; }
+}
+
+.gallery-item img {
+  border: 2px solid rgba(255,255,255,0.7);
+}
+
+
+/* ======= FUTURISTIC FACELIFT v2 ======= */
+body { background: transparent !important; }
+.fx-aurora {
+  position: fixed; inset: -20% -10% auto -10%;
+  height: 70vh;
+  background: radial-gradient(40% 60% at 20% 40%, rgba(112,68,255,.22), transparent 60%),
+              radial-gradient(40% 50% at 70% 30%, rgba(255,90,160,.18), transparent 60%),
+              radial-gradient(40% 60% at 50% 80%, rgba(80,200,255,.18), transparent 60%);
+  filter: blur(40px);
+  z-index: 0; pointer-events: none;
+  animation: auroraFloat 18s ease-in-out infinite alternate;
+}
+@keyframes auroraFloat {
+  0%   { transform: translateY(-2%) translateX(-1%) scale(1.0); }
+  100% { transform: translateY(2%)  translateX(1%)  scale(1.05); }
+}
+.gacha-container { position: relative; z-index: 1; }
+#gachaButton{
+  position: relative;
+  background: linear-gradient(135deg, #ff4d7e, #9f53ff);
+  border: none; border-radius: 18px; color: white;
+  padding: 1rem 2rem; font-size: 1.25rem; font-weight: 800;
+  letter-spacing: .6px; text-transform: uppercase;
+  box-shadow: 0 18px 36px rgba(159,83,255,0.35), 0 12px 24px rgba(255,77,126,0.25);
+  transition: transform .12s ease, box-shadow .12s ease; overflow: hidden;
+}
+#gachaButton:hover{ transform: translateY(-1px); }
+#gachaButton:active{ transform: translateY(0); }
+#gachaButton::after{
+  content:""; position:absolute; inset:-200% -50% auto -50%;
+  height: 400%; width: 200%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0) 46% 100%);
+  transform: rotate(20deg); animation: btnShineMega 2.4s linear infinite; pointer-events:none;
+}
+@keyframes btnShineMega { 0% { transform: translateX(-60%) rotate(20deg);} 100% { transform: translateX(60%) rotate(20deg);} }
+
+#resultCard{
+  position: relative;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px; padding: 16px; transform-style: preserve-3d;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 0 80px rgba(255,255,255,0.05);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+#resultCard:hover{ transform: perspective(900px) rotateX(6deg) rotateY(-6deg);
+  box-shadow: 0 28px 60px rgba(0,0,0,0.5), 0 0 60px rgba(120,180,255,.25); }
+#resultCard::after {
+  content: ""; position: absolute; inset: 0; border-radius: 20px; padding: 2px;
+  background: conic-gradient(from 0deg, #5ee7fe, #b490ff, #ff8ae2, #ffd35a, #5ee7fe);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  animation: spinBorder 3.2s linear infinite; pointer-events: none; z-index: 2;
+}
+@keyframes spinBorder { to { transform: rotate(1turn); } }
+#photoCard{ border-radius: 14px; border: 1px solid rgba(255,255,255,0.22); box-shadow: 0 10px 28px rgba(0,0,0,0.35); }
+
+.common-style    { box-shadow: 0 0 42px rgba(130,130,130,.25); }
+.rare-style      { box-shadow: 0 0 70px rgba(90,140,255,.45); }
+.ultra-style     { box-shadow: 0 0 90px rgba(255,120,220,.6); }
+.legendary-style { box-shadow: 0 0 120px rgba(255,215,0,.75); }
+
+.rarity-label{ display:inline-block; padding: 8px 14px; border-radius:999px;
+  background: rgba(255,255,255,0.13); border: 1px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(4px); font-weight: 700; letter-spacing:.5px; }
+
+.common-style    .rarity-label{ color: #cfd1d7; }
+.rare-style      .rarity-label{ color: #8fb1ff; }
+.ultra-style     .rarity-label{ color: #ff9fe4; }
+.legendary-style .rarity-label{ color: #ffe28a; }
+
+.shine{ content:""; position:absolute; top:0; left:-160%; width: 70%; height:100%;
+  background: linear-gradient(115deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.65) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-15deg); filter: blur(1.5px); animation: shineAcross 0.85s ease-out forwards;
+  z-index: 3; pointer-events:none; }
+@keyframes shineAcross { to { left: 135%; } }
+
+.fx-tiles{ position: fixed; inset:0; pointer-events:none; z-index: 9998; }
+.tile{ position:absolute; width: 18px; height: 10px; border-radius: 3px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.25));
+  box-shadow: 0 8px 24px rgba(0,0,0,.35); transform: translate(-50%, -50%) rotate(0deg);
+  mix-blend-mode: screen; animation: tileSpin 1.6s ease-in-out forwards; }
+.tile::after{ content:""; position:absolute; inset:0;
+  background: linear-gradient(135deg, #54f7ff, #a084ff, #ff78d1, #ffe66a);
+  opacity:.55; border-radius:3px; mix-blend-mode: overlay; }
+@keyframes tileSpin{
+  0%   { transform: translate(var(--x,0), var(--y,0)) rotate(0deg) scale(.9); opacity:.0; }
+  15%  { opacity: 1; }
+  100% { transform: translate(calc(var(--x,0) + var(--dx,0)), calc(var(--y,0) + var(--dy,0))) rotate(540deg) scale(0.6); opacity:0; }
+}
+
+.beam{ position: fixed; top: 50%; left: 50%; width: 2px; height: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,0));
+  transform-origin: top center; z-index: 9997; pointer-events:none;
+  animation: beamShoot .6s ease-out forwards; filter: blur(.2px); }
+@keyframes beamShoot { to { height: 45vh; opacity: 0; transform: translate(-50%, -50%) rotate(var(--angle,0deg)); } }
+
+.confetti { position: fixed; width: 12px; height: 18px; top: -20px; border-radius: 3px; opacity: 0; z-index: 9999; pointer-events:none;
+  animation: confettiFall linear forwards; filter: saturate(1.1); }
+@keyframes confettiFall {
+  0%   { opacity: 0; transform: translate3d(var(--left,0), -40px, 0) rotate(0deg); }
+  10%  { opacity: 1; }
+  100% { transform: translate3d(var(--left,0), 110vh, 0) rotate(900deg); opacity: 0; }
+}
+
+
+:root{
+  --rose-1:#f9d9d9;
+  --rose-2:#fceeee;
+  --rose-3:#ffdfe6;
+  --rose-deep:#a23f3f;
+  --plum:#9f53ff;
+}
+
+.gacha-container, nav, .lang-toggle-bar{position:relative; z-index:2;}
+#toggleGallery{
+  display:inline-flex; align-items:center; gap: 0;
+  margin-top:12px; padding:.7rem 1.35rem; border:none; border-radius:16px;
+  background:linear-gradient(135deg, var(--rose-deep), var(--plum));
+  color:#fff; font-weight:800; letter-spacing:.5px; text-transform:uppercase;
+  box-shadow:0 16px 36px rgba(159,83,255,.28), 0 10px 24px rgba(162,63,63,.22);
+  transition:transform .12s ease, box-shadow .12s ease, opacity .2s ease;
+ justify-content: center; text-align:center;}
+#toggleGallery:hover{ transform: translateY(-1px); }
+#toggleGallery:active{ transform: translateY(0); }
+
+#rarityLabel{ position:absolute; top:-24px; left:50%; transform:translateX(-50%); margin:0; text-align:center; }
+#photoCard{ transition: transform .25s ease; transform-origin:center; }
+#photoCard.idle-float{ animation: floatIdle 6s ease-in-out infinite; }
+@keyframes floatIdle{ 0%{ transform: translateY(0) } 50%{ transform: translateY(-6px) } 100%{ transform: translateY(0) } }
+#photoCard.spin-bounce{ animation: spinBounce 700ms ease both; }
+@keyframes spinBounce{ 0%{ transform: translateY(0) rotate(0deg) scale(1); } 35%{ transform: translateY(-16px) rotate(-6deg) scale(1.03); } 70%{ transform: translateY(2px) rotate(4deg)  scale(0.99); } 100%{ transform: translateY(0) rotate(0deg)   scale(1); } }
+.rarity-label{ left:50%; transform:translateX(-50%); }
+@media (prefers-reduced-motion: reduce){ #photoCard.idle-float{ animation: none; } }
+
+
+/* === Ever-changing gradient background canvas (behind everything) === */
+
+
+/* Keep UI above */
+.gacha-container, nav, .lang-toggle-bar { position: relative; z-index: 2; }
+
+/* Remove busy ring; let gel halo handle lift */
+#resultCard::after { display: none !important; }
+
+/* Ensure rarity chip isn't clipped */
+#resultCard { overflow: visible !important; position: relative; }
+
+/* Gel halo behind photo */
+#resultCard::before {
+  content: "";
+  position: absolute; inset: -12%;
+  border-radius: 28px;
+  background: conic-gradient(from var(--gel-angle,0deg),
+    rgba(249,217,217,.55), rgba(159,83,255,.45), rgba(255,180,220,.50), rgba(249,217,217,.55));
+  filter: blur(42px);
+  animation: gelSpin 18s linear infinite;
+  z-index: 0; pointer-events: none;
+}
+@keyframes gelSpin { to { transform: rotate(1turn); } }
+
+/* Impactful futuristic rarity chip */
+#rarityLabel {
+  position: absolute; top: -28px; left: 50%; transform: translateX(-50%);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 800;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.06));
+  border: 1px solid rgba(255,255,255,.35);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 26px rgba(0,0,0,.35), 0 0 28px rgba(160,120,255,.35);
+  z-index: 3;
+  animation: rarityPop .5s ease;
+}
+@keyframes rarityPop {
+  0% { transform: translateX(-50%) scale(.85); opacity: .0; }
+  60% { transform: translateX(-50%) scale(1.08); opacity: 1; }
+  100% { transform: translateX(-50%) scale(1.0); }
+}
+
+/* Color glows per rarity (targeting card state) */
+#resultCard.rarity-common  #rarityLabel { box-shadow: 0 0 30px rgba(200,200,200,.35); background: linear-gradient(135deg, rgba(240,240,240,.22), rgba(210,210,210,.08)); }
+#resultCard.rarity-rare    #rarityLabel { box-shadow: 0 0 36px rgba(120,160,255,.55); background: linear-gradient(135deg, rgba(120,160,255,.28), rgba(80,130,255,.12)); }
+#resultCard.rarity-ultra   #rarityLabel { box-shadow: 0 0 44px rgba(255,120,230,.65); background: linear-gradient(135deg, rgba(255,140,230,.30), rgba(255,110,210,.12)); }
+#resultCard.rarity-legendary #rarityLabel { box-shadow: 0 0 54px rgba(255,215,0,.75); background: linear-gradient(135deg, rgba(255,220,120,.30), rgba(255,190,60,.14)); }
+
+/* Slight neon inner border */
+#rarityLabel::after {
+  content:""; position:absolute; inset:0; border-radius:999px; padding:2px;
+  background: linear-gradient(135deg, #fff, rgba(255,255,255,.45));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity: .65; pointer-events: none;
+}
+
+/* keep album button on-brand */
+#toggleGallery{
+  display:inline-flex; align-items:center; gap:.55rem;
+  margin-top:12px; padding:.85rem 1.45rem; border:none; border-radius:16px;
+  background: linear-gradient(135deg, #a23f3f, #9f53ff);
+  color: #fff; font-weight: 800; letter-spacing:.5px; text-transform: uppercase;
+  box-shadow: 0 16px 36px rgba(159,83,255,.28), 0 10px 24px rgba(162,63,63,.22);
+}
+
+
+/* === Full-viewport liquid gradient canvas (behind everything) === */
+
+
+/* Keep UI above canvas */
+.gacha-container, nav, .lang-toggle-bar { position: relative; z-index: 2; }
+
+/* Avoid white page background showing through before canvas paints */
+html, body { background: linear-gradient(180deg,#ffd6d6 0%,#f7c2ff 50%,#ffe6f2 100%) !important; }
+
+/* tighten space between the album button and the gallery */
+#toggleGallery{ margin-bottom: .35rem !important; }
+#gallery{ margin-top: .5rem !important; }
+
+/* --- Seamless fill: canvas size is controlled by JS (pixel height) --- */
+#nebulaCanvas{
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: auto !important; /* let JS set computed pixel height */
+  z-index: -2;
+  pointer-events: none;
+  background: transparent !important;
+}
