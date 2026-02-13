@@ -30,7 +30,69 @@ nav a:hover { text-decoration: underline; }
 
 /* Sections */
 section { padding: 60px 0; }
-#hero { background: url('images/coloradoriver.jpg') center/cover no-repeat; color: white; height: 80vh; display: flex; align-items: center; justify-content: center; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+#hero {
+  color: white;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+  position: relative;
+  overflow: hidden;
+}
+#hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.25));
+  z-index: 1;
+  pointer-events: none;
+}
+#hero .container {
+  position: relative;
+  z-index: 2;
+}
+.hero-slides {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.hero-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 1.2s ease-in-out;
+}
+.hero-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 2;
+}
+.hero-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.45);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  padding: 0;
+}
+.hero-dot.is-active {
+  background: rgba(255,255,255,0.95);
+  transform: scale(1.15);
+}
 #hero h1 { font-size: 3rem; }
 
 /* Grid */
@@ -39,9 +101,23 @@ section { padding: 60px 0; }
 /* Forms */
 form { max-width: 600px; margin: auto; display: flex; flex-direction: column; }
 form label { margin-bottom: 5px; font-weight: bold; }
-form input, form select, form textarea, form button { margin-bottom: 15px; padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 4px; }
+form input, form select, form textarea, form button { margin-bottom: 15px; padding: 10px; font-size: 1rem; font-family: inherit; line-height: inherit; border: 1px solid #ccc; border-radius: 4px; }
 form button { background: #a23f3f; color: white; border: none; cursor: pointer; }
 form button:hover { background: #8b332f; }
+/* Placeholder typography normalization (prevents subtle font/weight differences between input vs textarea) */
+form input::placeholder,
+form textarea::placeholder {
+  font-family: inherit;
+  font-weight: 400;
+  opacity: 0.65;
+}
+form input::-webkit-input-placeholder,
+form textarea::-webkit-input-placeholder {
+  font-family: inherit;
+  font-weight: 400;
+  opacity: 0.65;
+}
+
 
 /* Footer */
 footer { background: #f8f8f8; padding: 20px 0; text-align: center; font-size: 0.9rem; border-top: 1px solid #ddd; }

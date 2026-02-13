@@ -97,6 +97,11 @@ nav a:hover { text-decoration: underline; }
   display: none;
 }
 
+#resultCard.hidden,
+#gallery.hidden {
+  display: none !important;
+}
+
 /* Rarity background effects */
 #resultCard::before {
   content: '';
@@ -515,4 +520,22 @@ html, body { background: linear-gradient(180deg,#ffd6d6 0%,#f7c2ff 50%,#ffe6f2 1
   z-index: -2;
   pointer-events: none;
   background: transparent !important;
+}
+
+/* === Single continuous page background (final override) === */
+html, body {
+  min-height: 100%;
+  background: linear-gradient(180deg, #ffd6d6 0%, #f7c2ff 50%, #ffe6f2 100%) fixed !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+nav,
+.lang-toggle-bar,
+.gacha-container {
+  background: transparent !important;
+}
+
+nav {
+  border-bottom-color: transparent !important;
 }

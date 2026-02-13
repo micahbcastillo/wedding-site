@@ -5,10 +5,110 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Timeline</title>
   <link href="styles.css" rel="stylesheet" />
-  <!-- Optional: keep this if you want the toggle styles separated -->
-  <link href="lang-toggle.css" rel="stylesheet" />
 
   <style>
+    body.timeline-page {
+      background:
+        radial-gradient(circle at 10% 8%, rgba(173, 211, 196, 0.22), transparent 34%),
+        radial-gradient(circle at 90% 16%, rgba(245, 210, 180, 0.2), transparent 32%),
+        linear-gradient(180deg, #fcfaf6 0%, #f4f0ff 44%, #f3faf4 100%);
+    }
+
+    #timeline {
+      position: relative;
+      margin-top: 24px;
+      margin-bottom: 38px;
+      padding: 30px 24px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid rgba(160, 142, 186, 0.22);
+      box-shadow: 0 16px 36px rgba(119, 102, 142, 0.12);
+      overflow: hidden;
+    }
+
+    #timeline::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 14% 16%, rgba(139, 195, 169, 0.13) 0 16%, transparent 17%),
+        radial-gradient(circle at 84% 84%, rgba(187, 153, 218, 0.12) 0 15%, transparent 16%);
+      opacity: 0.8;
+    }
+
+    #timeline > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    #timeline h2 {
+      color: #5d4f74;
+      letter-spacing: 0.35px;
+      margin-bottom: 26px;
+    }
+
+    .timeline::before {
+      background: linear-gradient(180deg, #bad3c9 0%, #ccbde0 100%);
+      width: 3px;
+      border-radius: 999px;
+    }
+
+    .timeline-item::after {
+      background: #a8bfc5;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.85);
+    }
+
+    .timeline-item .content {
+      background: linear-gradient(145deg, rgba(255,255,255,0.96), rgba(244,249,255,0.92));
+      border: 1px solid rgba(165, 187, 208, 0.32);
+      box-shadow: 0 8px 20px rgba(114, 132, 154, 0.14);
+      border-radius: 12px;
+    }
+
+    .timeline-date {
+      color: #5f5678;
+    }
+
+    .timeline-item img {
+      border: 1px solid rgba(169, 187, 207, 0.34);
+      box-shadow: 0 7px 16px rgba(120, 136, 158, 0.18);
+    }
+
+    .caption {
+      color: #544e67;
+    }
+
+    .caption-toggle {
+      color: #6a7094;
+      text-underline-offset: 2px;
+    }
+
+    .caption-toggle:hover {
+      color: #585f86;
+    }
+
+    .modal {
+      background: rgba(72, 65, 84, 0.84);
+      backdrop-filter: blur(3px);
+    }
+
+    .modal img {
+      border: 1px solid rgba(255,255,255,0.28);
+      box-shadow: 0 14px 30px rgba(30, 24, 38, 0.36);
+    }
+
+    .modal .close {
+      color: #f7f2ff;
+    }
+
+    @media (max-width: 768px) {
+      #timeline {
+        padding: 22px 14px;
+        border-radius: 16px;
+      }
+    }
+
     /* Expandable captions (keeps long descriptions compact) */
     .caption .more-text { display: none; }
     .caption .ellipsis { display: inline; }
@@ -31,7 +131,7 @@
   </style>
 
 </head>
-<body>
+<body class="timeline-page">
   <nav>
     <ul>
       <li><a href="index.html"><span class="english">Home</span><span class="spanish">Inicio</span></a></li>
@@ -96,7 +196,7 @@
   {
     "filename": "LeagueCityHouseChristmas_112522.jpg",
     "date": "2022-11-25",
-    "en": "Of the few times Carolina was able to come back to the house where Micah spent a majority of his childhood, this was one of the more memorable. Not in frame here Is Carolina's laptop with her study materials.",
+    "en": "Of the few times Carolina was able to come back to the house where Micah spent a majority of his childhood, this was one of the more memorable. Not in frame here is Carolina's laptop with her study materials.",
     "es": "De las pocas veces que Carolina pudo volver a la casa donde Micah pasó gran parte de su infancia, esta fue una de las más memorables. Fuera de cuadro está la laptop de Carolina con sus materiales de estudio."
   },
   {
@@ -222,7 +322,7 @@
   {
     "filename": "SheDoesntKnow_121424.jpg",
     "date": "2024-12-14",
-    "en": "She has no idea what it about to happen….",
+    "en": "She has no idea what is about to happen….",
     "es": "Ella no tiene idea de lo que está a punto de pasar…"
   },
   {
@@ -270,7 +370,7 @@
   {
     "filename": "Intero2_040225.jpg",
     "date": "2025-04-02",
-    "en": "We love Intero in Austin,TX so much! If you have never been, it is a 10/10 restaurant for both of us!",
+    "en": "We love Intero in Austin, TX so much! If you have never been, it is a 10/10 restaurant for both of us!",
     "es": "¡Nos encanta tanto Intero en Austin, TX! Si nunca has ido, para nosotros es un restaurante 10/10."
   },
   {

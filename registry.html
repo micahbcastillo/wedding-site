@@ -11,26 +11,63 @@
 <!-- Leaflet CSS (NO integrity) -->
 <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/>
 <style>
+    body {
+      background:
+        radial-gradient(circle at 10% 10%, rgba(173, 211, 196, 0.22), transparent 34%),
+        radial-gradient(circle at 90% 14%, rgba(245, 210, 180, 0.22), transparent 32%),
+        linear-gradient(180deg, #fcfaf6 0%, #f4f0ff 44%, #f3faf4 100%);
+    }
+
+    #registry {
+      position: relative;
+      margin-top: 24px;
+      margin-bottom: 38px;
+      padding: 30px 26px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid rgba(160, 142, 186, 0.22);
+      box-shadow: 0 16px 36px rgba(119, 102, 142, 0.12);
+      overflow: hidden;
+    }
+
+    #registry::before {
+      content: none;
+    }
+
+    #registry > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    #registry h2 {
+      color: #5d4f74;
+      margin-bottom: 14px;
+      letter-spacing: 0.35px;
+    }
+
     #map {
       height: 450px;
       width: 100%;
-      border-radius: 8px;
-      border: 2px solid #c2b89f;
+      border-radius: 14px;
+      border: 1px solid rgba(166, 150, 191, 0.36);
       margin-bottom: 20px;
+      box-shadow: 0 10px 22px rgba(120, 106, 145, 0.16);
     }
 
     .prompt-box {
-      padding: 15px;
-      background: #f8f8f8;
-      border-radius: 8px;
+      padding: 16px 18px;
+      background: linear-gradient(145deg, rgba(250, 255, 252, 0.9), rgba(245, 248, 255, 0.92));
+      border-radius: 12px;
+      border: 1px solid rgba(171, 197, 183, 0.34);
+      box-shadow: 0 6px 14px rgba(128, 156, 140, 0.14);
       text-align: center;
       margin-bottom: 20px;
       font-family: 'Cormorant Garamond', serif;
-      color: #5e6b55;
+      color: #5b6f66;
       font-size: 1.2rem;
     }
 
-    form {
+    #suggestionForm {
       max-width: 600px;
       margin: auto;
       display: flex;
@@ -38,30 +75,36 @@
       gap: 15px;
     }
 
-    form label {
+    #suggestionForm label {
       font-weight: bold;
+      color: #61576f;
     }
 
-    form input,
-    form textarea {
+    #suggestionForm input,
+    #suggestionForm textarea {
       padding: 10px;
       font-size: 1rem;
-      border-radius: 4px;
-      border: 1px solid #ccc;
+      border-radius: 8px;
+      border: 1px solid #d7cde2;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
     }
 
-    form button {
-      background: #a23f3f;
+    #suggestionForm button {
+      background: linear-gradient(135deg, #9fbdd1, #b9a9d3);
       color: white;
-      padding: 10px;
+      padding: 11px 14px;
       border: none;
-      border-radius: 4px;
+      border-radius: 999px;
       font-size: 1rem;
       cursor: pointer;
+      box-shadow: 0 7px 14px rgba(128, 127, 174, 0.28);
+      transition: transform 0.2s ease, filter 0.2s ease;
     }
 
-    form button:hover {
-      background-color: #8b332f;
+    #suggestionForm button:hover {
+      transform: translateY(-1px);
+      filter: brightness(0.95);
     }
   
 
@@ -73,9 +116,26 @@
       width: 100%;
       max-width: 980px;
       height: auto;
-      border-radius: 10px;
-      border: 1px solid rgba(0,0,0,0.08);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      border-radius: 12px;
+      border: 1px solid rgba(162, 148, 188, 0.28);
+      box-shadow: 0 8px 18px rgba(116, 108, 143, 0.14);
+    }
+
+    #registryStatus {
+      background: #f2fef8 !important;
+      border-color: #b9e6d1 !important;
+      color: #4e6d62;
+    }
+
+    @media (max-width: 768px) {
+      #registry {
+        padding: 22px 14px;
+        border-radius: 16px;
+      }
+
+      #map {
+        height: 360px;
+      }
     }
 </style>
 <style>

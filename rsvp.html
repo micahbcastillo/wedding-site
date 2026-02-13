@@ -17,11 +17,126 @@
   box-sizing: border-box;
 }
 </style><style>
+/* RSVP woodland embroidered style */
+body.rsvp-page {
+  background: #f8f3eb url("images/a.png") center center / cover no-repeat fixed;
+}
+
+body.rsvp-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(255, 252, 246, 0.55), rgba(250, 244, 234, 0.5));
+}
+
+#rsvp {
+  max-width: 860px;
+  margin: 28px auto 72px;
+  padding: 48px 38px 38px;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.72)),
+    repeating-linear-gradient(0deg, rgba(163, 140, 123, 0.02) 0 1px, transparent 1px 3px),
+    #fffaf3;
+  border: 2px solid #cbb6a3;
+  border-radius: 16px;
+  box-shadow:
+    0 16px 42px rgba(130, 108, 92, 0.14),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.82);
+  position: relative;
+  overflow: hidden;
+}
+
+#rsvp > * {
+  position: relative;
+  z-index: 1;
+}
+
+#rsvp::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border-radius: 12px;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(90deg, rgba(152, 126, 107, 0.38) 50%, transparent 0) top / 14px 2px repeat-x,
+    linear-gradient(90deg, rgba(152, 126, 107, 0.38) 50%, transparent 0) bottom / 14px 2px repeat-x,
+    linear-gradient(180deg, rgba(152, 126, 107, 0.38) 50%, transparent 0) left / 2px 14px repeat-y,
+    linear-gradient(180deg, rgba(152, 126, 107, 0.38) 50%, transparent 0) right / 2px 14px repeat-y;
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+}
+
+#rsvp::after {
+  content: none;
+}
+
+#rsvp h2 {
+  font-size: 2.6rem;
+  letter-spacing: 0.8px;
+  margin-bottom: 28px;
+  color: #8b6754;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+#WeddingForm {
+  max-width: 100%;
+}
+
+#WeddingForm label {
+  color: #7d6453;
+}
+
+#WeddingForm fieldset {
+  border: 1px solid #dbcab9;
+  border-radius: 10px;
+  padding: 14px 16px 8px;
+  margin: 8px 0 16px;
+  background: rgba(255, 255, 255, 0.74);
+}
+
+#WeddingForm legend {
+  padding: 0 8px;
+  color: #8b6e5a;
+  font-weight: 600;
+}
+
+#WeddingForm input,
+#WeddingForm textarea,
+#WeddingForm select {
+  border-color: #decfc2;
+  background: rgba(255, 255, 255, 0.96);
+}
+
+#WeddingForm button[type="submit"] {
+  margin-top: 6px;
+  border-radius: 999px;
+  padding: 11px 22px;
+  background: linear-gradient(135deg, #bda6b2, #a4b9ad);
+  box-shadow: 0 8px 18px rgba(146, 157, 148, 0.28);
+}
+
+#WeddingForm button[type="submit"]:hover {
+  background: linear-gradient(135deg, #af97a4, #96ab9f);
+}
+
+@media (max-width: 700px) {
+  #rsvp {
+    padding: 34px 20px 26px;
+    margin: 18px auto 50px;
+  }
+
+  #rsvp h2 {
+    font-size: 2.05rem;
+  }
+}
+</style><style>
 /* Language visibility rules (symmetric) */
 html[data-lang="en"] .spanish { display: none !important; }
 html[data-lang="es"] .english { display: none !important; }
 </style></head>
-<body>
+<body class="rsvp-page">
 <nav>
 <ul>
 <li><a href="index.html"><span class="english">Home</span><span class="spanish">Inicio</span></a></li>
@@ -74,7 +189,7 @@ html[data-lang="es"] .english { display: none !important; }
 </div>
 <!-- Optional Extras -->
 <label for="song"><span class="english">Song Request</span><span class="spanish">Solicitud de Canción</span></label>
-<input data-i18n-en="A song you'd love to hear" data-i18n-es="Una canción que te gustaría escuchar" id="song" name="song" placeholder="A song you'd love to hear" type="text"/>
+<input data-i18n-en="What do you enjoy dancing to? If married, what was your first dance song?" data-i18n-es="¿Qué tipo de música te gusta bailar y cuál fue la canción de nuestro primer baile?" id="song" name="song" placeholder="A song you'd love to hear" type="text"/>
 
 <!-- Favorite Memory -->
 <label for="favoriteMemory">
@@ -90,7 +205,7 @@ html[data-lang="es"] .english { display: none !important; }
   placeholder="Share a favorite moment or story"
 ></textarea>
 
-<label for="comments"><span class="english">Additional Comments</span><span class="spanish">Comentarios Adicionales</span></label>
+<label for="comments"><span class="english">Additional Comments - Include Allergies If Any</span><span class="spanish">Comentarios Adicionales - Incluya las alergias, si las hay.</span></label>
 <textarea data-i18n-en="Any other notes for us" data-i18n-es="Cualquier otra nota para nosotros" id="comments" name="comments" placeholder="Any other notes for us" rows="3">
       </textarea>
 <input name="_subject" type="hidden" value="Wedding RSVP"/>
