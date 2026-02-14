@@ -28,6 +28,26 @@ nav {
   z-index: 9999;
 }
 
+@media (max-width: 768px) {
+  nav ul {
+    flex-wrap: wrap;
+    white-space: normal;
+    overflow-x: visible;
+    gap: 6px 10px;
+    padding: 0 8px;
+  }
+
+  nav li {
+    margin: 0;
+  }
+
+  .gacha-container > button {
+    min-width: 0;
+    width: 100%;
+    max-width: 360px;
+  }
+}
+
 nav li { margin: 0 15px; }
 nav a {
   color: #a23f3f;

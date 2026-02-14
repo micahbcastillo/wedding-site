@@ -99,13 +99,36 @@
     }
 
     .modal .close {
+      position: fixed;
+      top: calc(14px + env(safe-area-inset-top, 0px));
+      right: calc(14px + env(safe-area-inset-right, 0px));
+      width: 44px;
+      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: rgba(35, 30, 44, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.32);
       color: #f7f2ff;
+      font-size: 2rem;
+      line-height: 1;
+      z-index: 1001;
+      cursor: pointer;
+      user-select: none;
     }
 
     @media (max-width: 768px) {
       #timeline {
         padding: 22px 14px;
         border-radius: 16px;
+      }
+
+      .modal .close {
+        top: calc(10px + env(safe-area-inset-top, 0px));
+        right: calc(10px + env(safe-area-inset-right, 0px));
+        width: 48px;
+        height: 48px;
       }
     }
 
@@ -130,6 +153,15 @@
     }
   </style>
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DT68QHSTY3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DT68QHSTY3');
+</script>
 </head>
 <body class="timeline-page">
   <nav>
@@ -182,6 +214,12 @@
     const TIMELINE_IMAGE_BASE = "images/timelinephotos/";
     const TIMELINE_DATA = [
   {
+    "filename": "FirstMessage.jpeg",
+    "date": "2021-08-22",
+    "en": "For those who did not believe what we said on the summary page... here is the proof!",
+    "es": "Para quienes no creyeron lo que dijimos en la página de resumen... ¡aquí está la prueba!"
+  },
+  {
     "filename": "Cancun_012422.jpg",
     "date": "2022-01-24",
     "en": "Our first real trip was to Cancun! We somehow scraped up enough cash to make it over there and had a great time! It was Micah's first vacation in years! Side note: The taco place we were at in this picture was amazing. We laugh at this when we think back now, but we actually did not even have enough money for the bus ride back to our hotel so we had to walk!",
@@ -214,8 +252,8 @@
   {
     "filename": "NapaliWedding_022623.jpg",
     "date": "2023-02-26",
-    "en": "The first \"plus-one\" experience is always a step in any relationship. For us, the first wedding we attended as a couple was held by one of Micah's lab mates from Nepal. This event helped Micah and Carolina discover that their view of what a \"party\" looked like very much inside the box.",
-    "es": "La primera experiencia de ir como “acompañante” a un evento siempre es un paso en cualquier relación. Para nosotros, la primera boda a la que fuimos como pareja fue de un compañero de laboratorio de Micah de Nepal. Ese día Micah y Carolina descubrieron que su idea de lo que era una “fiesta” estaba… bastante dentro de la caja."
+    "en": "The first \"plus-one\" experience is always a step in any relationship. For us, the first wedding we attended as a couple was held by one of Micah's lab mates from Nepal. This event helped Micah and Carolina discover that their view of what a \"party\" looked like was very much inside the box.",
+    "es": "La primera experiencia de ir como “acompañante” a un evento siempre es un paso en cualquier relación. Para nosotros, la primera boda a la que fuimos como pareja fue la de un compañero de laboratorio de Micah, originario de Nepal. Ese día, Micah y Carolina descubrieron que su idea de lo que era una “fiesta” era bastante tradicional."
   },
   {
     "filename": "TSwift_040223.jpg",
@@ -575,6 +613,21 @@
 
     document.addEventListener("click", (e) => {
       if (e.target && e.target.classList && e.target.classList.contains("close")) {
+        closeModal();
+      }
+      // Mobile-friendly: tap the dark backdrop to close.
+      if (e.target && e.target.id === "image-modal") {
+        closeModal();
+      }
+    });
+    document.addEventListener("keydown", (e) => {
+      if (
+        (e.key === "Enter" || e.key === " ") &&
+        e.target &&
+        e.target.classList &&
+        e.target.classList.contains("close")
+      ) {
+        e.preventDefault();
         closeModal();
       }
     });
