@@ -23,10 +23,68 @@
   padding: 0;
   margin: 0;
 }
+
+/* FAQ section */
+#faq {
+  margin-top: 10px;
+}
+
+#faq h2 {
+  margin-bottom: 18px;
+}
+
+.faq-item {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.faq-item h3 {
+  text-align: left;
+  margin-bottom: 0;
+  color: #5a3e3e;
+  font-size: 1.15rem;
+  cursor: pointer;
+  position: relative;
+  padding-right: 28px;
+  user-select: none;
+}
+
+.faq-item h3::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #7b5a5a;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.faq-item.is-open h3::after {
+  content: "−";
+}
+
+.faq-item p {
+  display: none;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+.faq-item p:last-child {
+  margin-bottom: 0;
+}
+
+.faq-item.is-open p {
+  display: block;
+}
 </style><style>
 /* Language visibility rules (symmetric) */
 html[data-lang="en"] .spanish { display: none !important; }
 html[data-lang="es"] .english { display: none !important; }
+</style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DT68QHSTY3"></script>
 <script>
@@ -35,8 +93,7 @@ html[data-lang="es"] .english { display: none !important; }
   gtag('js', new Date());
 
   gtag('config', 'G-DT68QHSTY3');
-</script>
-</style></head>
+</script></head>
 <body>
 <nav>
 <ul>
@@ -82,9 +139,142 @@ html[data-lang="es"] .english { display: none !important; }
 </div>
 </div>
 </section>
+<section class="container" id="faq">
+<h2><span class="english">Frequently Asked Questions</span><span class="spanish">Preguntas Frecuentes</span></h2>
+
+<div class="faq-item">
+  <h3><span class="english">When should I RSVP by?</span><span class="spanish">¿Para cuándo debo confirmar mi asistencia (RSVP)?</span></h3>
+  <p class="english">To RSVP, please click the RSVP tab here on our website and type in your name. We ask that you kindly RSVP by March 7th so we can finalize catering and seating arrangements.</p>
+  <p class="spanish">Para confirmar tu asistencia, por favor haz clic en la pestaña RSVP aquí en nuestro sitio web e ingresa tu nombre. Te pedimos amablemente confirmar a más tardar el 7 de marzo para poder finalizar el catering y la asignación de asientos.</p>
+</div>
+
+<div class="faq-item">
+  <h3><span class="english">What if I don’t RSVP in time?</span><span class="spanish">¿Qué pasa si no confirmo mi asistencia a tiempo?</span></h3>
+  <p class="english">If you do not RSVP by March 7th, you will be marked as “not attending”. We would love celebrating with you, however, we have to provide an exact guest count to our vendors and cannot accept late RSVPs.</p>
+  <p class="spanish">Si no confirmas tu asistencia antes del 7 de marzo, se te marcará como “no asistirá”. Nos encantaría celebrar contigo, pero debemos proporcionar un número exacto de invitados a nuestros proveedores y no podremos aceptar confirmaciones tardías.</p>
+</div>
+
+<div class="faq-item">
+  <h3><span class="english">What if I RSVP’d and can’t make it?</span><span class="spanish">¿Qué pasa si ya confirmé y luego no puedo asistir?</span></h3>
+  <p class="english">You will be missed! Life happens, no worries. Please, let us know as soon as possible that you will no longer be in attendance.</p>
+  <p class="spanish">¡Te vamos a extrañar! Sabemos que la vida pasa, no te preocupes. Por favor avísanos lo antes posible que ya no podrás asistir.</p>
+</div>
+
+<div class="faq-item">
+  <h3><span class="english">Can I bring a plus-one?</span><span class="spanish">¿Puedo llevar acompañante (+1)?</span></h3>
+  <p class="english">Due to limited capacity, if your plus-one was not included on the invitation we ask that you reach out to us directly.</p>
+  <p class="spanish">Debido a la capacidad limitada, si tu acompañante no fue incluido en la invitación, te pedimos que te comuniques directamente con nosotros.</p>
+</div>
+
+<div class="faq-item">
+  <h3><span class="english">Do you have a registry?</span><span class="spanish">¿Tienen mesa de regalos?</span></h3>
+  <p class="english">Your presence is the greatest gift, truly. We’re so very grateful you’re celebrating with us! If you’d like to gift us something, we aren’t doing a traditional registry—instead, we’ve set up a honeymoon fund to help us fuel our first adventure as a married couple.</p>
+  <p class="spanish">Tu presencia es el mejor regalo, de verdad. ¡Estamos muy agradecidos de que celebres con nosotros! Si deseas hacernos un regalo, no tendremos una mesa de regalos tradicional; en su lugar, hemos creado un fondo para nuestra luna de miel para impulsar nuestra primera aventura como matrimonio.</p>
+</div>
+
+<div class="faq-item">
+  <h3><span class="english">What is the attire?</span><span class="spanish">¿Cuál es el código de vestimenta?</span></h3>
+  <p class="english">We would love to see our family and friends dress up with us! If you are able, we would love our guests to dress in semiformal attire. The ceremony will be held outside on a balcony. Please, take that into consideration when choosing what to wear. The average temperatures in April range from 60F to 78F.</p>
+  <p class="spanish">¡Nos encantaría ver a nuestra familia y amigos arreglarse con nosotros! Si te es posible, nos gustaría que nuestros invitados vistieran atuendo semiformal. La ceremonia se llevará a cabo al aire libre, en un balcón. Por favor, tómalo en cuenta al elegir qué ponerte. Las temperaturas promedio en abril van de 60°F a 78°F.</p>
+  <p class="english">If you’d like some guidance, we think this website has good recommendations: <a href="https://thesixpence.com/2025/02/05/semi-formal-wedding-attire/" rel="noopener" target="_blank">thesixpence.com/2025/02/05/semi-formal-wedding-attire/</a></p>
+  <p class="spanish">Si te gustaría tener una guía, creemos que este sitio web tiene muy buenas recomendaciones: <a href="https://thesixpence.com/2025/02/05/semi-formal-wedding-attire/" rel="noopener" target="_blank">thesixpence.com/2025/02/05/semi-formal-wedding-attire/</a></p>
+</div>
+
+<div class="faq-item">
+  <h3><span class="english">Where is the nearest airport?</span><span class="spanish">¿Cuál es el aeropuerto más cercano?</span></h3>
+  <p class="english">George Bush Intercontinental Airport is about 34 minutes from the venue. William P. Hobby Airport is about 53 minutes from the venue.</p>
+  <p class="spanish">El Aeropuerto Intercontinental George Bush está a aproximadamente 34 minutos del lugar. El Aeropuerto William P. Hobby está a aproximadamente 53 minutos del lugar.</p>
+</div>
+
+<div class="faq-item">
+  <h3><span class="english">Where should out-of-town guests stay?</span><span class="spanish">¿Dónde deberían hospedarse los invitados que vienen de fuera?</span></h3>
+  <p class="english">Travel details and nearby options are listed in the Travel section of our website.</p>
+  <p class="spanish">Los detalles de viaje y opciones cercanas de hospedaje están en la sección de Viajes de nuestro sitio web.</p>
+</div>
+
+<div class="faq-item">
+  <h3><span class="english">Where are the ceremony and reception?</span><span class="spanish">¿Dónde serán la ceremonia y la recepción?</span></h3>
+  <p class="english">Both will be held at the same venue (The Lake House: 1039 Lake House Dr, Conroe, TX 77304). The ceremony will be held outdoors on the balcony, while the reception will be inside.</p>
+  <p class="spanish">Ambas se llevarán a cabo en el mismo lugar (The Lake House: 1039 Lake House Dr, Conroe, TX 77304). La ceremonia será al aire libre en el balcón, mientras que la recepción será en el interior.</p>
+</div>
+
+<div class="faq-item">
+  <h3><span class="english">What time should I arrive?</span><span class="spanish">¿A qué hora debo llegar?</span></h3>
+  <p class="english">Please plan to arrive 15–20 minutes early so you have plenty of time to park, find your seats, and settle in before the ceremony begins.</p>
+  <p class="spanish">Por favor planea llegar de 15 a 20 minutos antes para que tengas suficiente tiempo de estacionarte, encontrar tu lugar y acomodarte antes de que comience la ceremonia.</p>
+</div>
+
+<div class="faq-item">
+  <h3><span class="english">Where do I park?</span><span class="spanish">¿Dónde me estaciono?</span></h3>
+  <p class="english">Our venue has on-site parking available.</p>
+  <p class="spanish">Nuestro lugar cuenta con estacionamiento en el sitio.</p>
+</div>
+
+<div class="faq-item">
+  <h3><span class="english">Will the wedding be bilingual?</span><span class="spanish">¿La boda será bilingüe?</span></h3>
+  <p class="english">Yes—parts of the day will be in both English and Spanish so everyone can feel included.</p>
+  <p class="spanish">Sí; partes del día serán en inglés y en español para que todos se sientan incluidos.</p>
+</div>
+
+<div class="faq-item">
+  <h3><span class="english">Can I take photos/videos during the wedding?</span><span class="spanish">¿Puedo tomar fotos o videos durante la boda?</span></h3>
+  <p class="english">We are having an unplugged ceremony, meaning that once the ceremony begins, we ask that all phones be put away and silenced. The greatest gift you can give us is being fully present when we say, “I do”. Our wonderful photographer will capture this special moment for us, and we promise to share our photos as soon as we receive them. That said, we’d love your photos at the reception! We will be sharing a QR code after the wedding to compile any photos you’d be happy to share.</p>
+  <p class="spanish">Tendremos una ceremonia “unplugged”, lo que significa que una vez que inicie la ceremonia, les pedimos guardar y silenciar sus teléfonos. El mejor regalo que nos pueden dar es estar plenamente presentes cuando digamos “sí, acepto”. Nuestro fotógrafo capturará este momento tan especial, y prometemos compartir las fotos en cuanto las recibamos. Dicho esto, ¡nos encantarán sus fotos durante la recepción! Después de la boda compartiremos un código QR para reunir todas las fotos que deseen compartir.</p>
+</div>
+
+<div class="faq-item">
+  <h3><span class="english">Will food and drinks be served?</span><span class="spanish">¿Habrá comida y bebidas?</span></h3>
+  <p class="english">Yes. We’ll have food and drinks during the reception. If you have any dietary allergies, please include them in your RSVP.</p>
+  <p class="spanish">Sí. Habrá comida y bebidas durante la recepción. Si tienes alguna alergia alimentaria, por favor inclúyela en tu RSVP.</p>
+</div>
+
+<div class="faq-item">
+  <h3><span class="english">Will there be an open bar?</span><span class="spanish">¿Habrá barra libre?</span></h3>
+  <p class="english">We won’t be serving alcohol, but we’re excited to share a fun menu of mocktails, sparkling drinks, and other non-alcoholic options to celebrate together.</p>
+  <p class="spanish">No serviremos alcohol, pero nos emociona compartir un menú divertido de mocktails, bebidas con gas y otras opciones sin alcohol para celebrar juntos.</p>
+</div>
+
+<div class="faq-item">
+  <h3><span class="english">Will there be an after-party?</span><span class="spanish">¿Habrá after-party?</span></h3>
+  <p class="english">We’re not planning an official after-party. After the reception, we’ll be heading out to rest and soak it all in—but we’re so excited to celebrate together during the wedding.</p>
+  <p class="spanish">No estamos planeando un after-party oficial. Después de la recepción nos iremos a descansar y a asimilar todo, pero estamos muy emocionados de celebrar juntos durante la boda.</p>
+</div>
+
+<div class="faq-item">
+  <h3><span class="english">Still have questions?</span><span class="spanish">¿Aún tienes preguntas?</span></h3>
+  <p class="english">If you have any additional questions that are not listed or answered on this page, please feel free to reach out directly to us.</p>
+  <p class="spanish">Si tienes preguntas adicionales que no estén incluidas o respondidas en esta página, no dudes en contactarnos directamente.</p>
+</div>
+</section>
 <footer>
 <p><span class="english">© 2026 Micah &amp; Carolina. All rights reserved.</span><span class="spanish">Todos los derechos reservados.</span></p>
 </footer>
+<script>
+  (function () {
+    var headers = document.querySelectorAll('#faq .faq-item h3');
+    headers.forEach(function (h3) {
+      var item = h3.closest('.faq-item');
+      if (!item) return;
+
+      h3.setAttribute('role', 'button');
+      h3.setAttribute('tabindex', '0');
+      h3.setAttribute('aria-expanded', 'false');
+
+      function toggleItem() {
+        var isOpen = item.classList.toggle('is-open');
+        h3.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      }
+
+      h3.addEventListener('click', toggleItem);
+      h3.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleItem();
+        }
+      });
+    });
+  })();
+</script>
 <script src="lang-toggle.js"></script>
 </body>
 </html>
