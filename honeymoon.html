@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html data-lang="en" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Japan Honeymoon | Carolina &amp; Micah</title>
+  <link href="styles.css" rel="stylesheet" />
+  <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet" />
+  <link href="honeymoon.css" rel="stylesheet" />
+  <style>
+    html[data-lang="en"] .spanish { display: none !important; }
+    html[data-lang="es"] .english { display: none !important; }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DT68QHSTY3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DT68QHSTY3');
+  </script>
+</head>
+<body class="honeymoon-page">
+  <nav>
+    <ul>
+      <li><a href="index.html"><span class="english">Home</span><span class="spanish">Inicio</span></a></li>
+      <li><a href="timeline.html"><span class="english">Timeline</span><span class="spanish">Cronolog&iacute;a</span></a></li>
+      <li><a href="details.html"><span class="english">Event Details</span><span class="spanish">Detalles del Evento</span></a></li>
+      <li><a href="rsvp.html"><span class="english">RSVP</span><span class="spanish">Confirmaci&oacute;n</span></a></li>
+      <li><a href="registry.html"><span class="english">Registry</span><span class="spanish">Registro</span></a></li>
+      <li><a href="travel.html"><span class="english">Travel</span><span class="spanish">Viajes</span></a></li>
+      <li><a href="contact.html"><span class="english">Contact</span><span class="spanish">Contacto</span></a></li>
+      <li><a aria-current="page" href="honeymoon.html"><span class="english">Honeymoon</span><span class="spanish">Luna de Miel</span></a></li>
+      <li>
+        <a href="gacha/gacha.html">
+          <img alt="Memory gacha" class="nav-icon" src="images/Item_Masterless_Starglitter.webp" />
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="lang-toggle-bar">
+    <button aria-label="Toggle language" class="lang-toggle" id="lang-toggle" type="button">ES</button>
+  </div>
+
+  <main class="honeymoon-app">
+    <section aria-labelledby="honeymoon-title" class="trip-header">
+      <p class="trip-kicker">
+        <span class="english">May 13-26, 2026</span>
+        <span class="spanish">13-26 de mayo de 2026</span>
+      </p>
+      <h1 id="honeymoon-title">
+        <span class="english">Japan Honeymoon</span>
+        <span class="spanish">Luna de Miel en Jap&oacute;n</span>
+      </h1>
+      <p class="trip-subtitle">
+        <span class="english">A living travel journal from Tokyo lights to mountain air, temple mornings, Osaka flavor, and one final rail line home.</span>
+        <span class="spanish">Un diario de viaje vivo, desde las luces de Tokio hasta el aire de monta&ntilde;a, ma&ntilde;anas de templos, sabores de Osaka y el &uacute;ltimo tren de regreso.</span>
+      </p>
+      <div aria-label="Trip highlights" class="trip-stats">
+        <span><strong>8</strong> <span class="english">chapters</span><span class="spanish">cap&iacute;tulos</span></span>
+        <span><strong>6</strong> <span class="english">cities</span><span class="spanish">ciudades</span></span>
+        <span><strong>14</strong> <span class="english">days</span><span class="spanish">d&iacute;as</span></span>
+      </div>
+    </section>
+
+    <section aria-label="Japan honeymoon route" class="journey-board">
+      <div class="map-panel">
+        <div class="map-toolbar">
+          <div>
+            <p class="toolbar-eyebrow">
+              <span class="english">Route</span>
+              <span class="spanish">Ruta</span>
+            </p>
+            <p class="route-status" id="routeStatus">Tokyo + Haneda</p>
+          </div>
+          <div aria-label="Map controls" class="map-actions">
+            <button aria-label="Zoom out" class="map-control-button" id="zoomOutButton" title="Zoom out" type="button">&minus;</button>
+            <button aria-label="Reset zoom" class="map-control-button" id="zoomResetButton" title="Reset zoom" type="button">1x</button>
+            <button aria-label="Zoom in" class="map-control-button" id="zoomInButton" title="Zoom in" type="button">+</button>
+            <button aria-label="Play route animation" class="icon-button" id="routePlayButton" title="Play route animation" type="button">
+              <span aria-hidden="true" class="play-symbol"></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="japan-stage realistic-map-stage" id="japanStage">
+          <div aria-label="Interactive map of Japan honeymoon route" class="realistic-japan-map" id="japanMap"></div>
+        </div>
+
+        <div aria-hidden="true" class="route-progress">
+          <span id="routeProgressBar"></span>
+        </div>
+      </div>
+
+      <aside aria-live="polite" class="stop-panel" id="stopPanel">
+        <div class="stop-heading">
+          <p class="stop-sequence" id="stopSequence">01</p>
+          <div>
+            <p class="stop-date" id="stopDate">May 13-14</p>
+            <h2 id="stopTitle">Tokyo + Haneda</h2>
+          </div>
+        </div>
+
+        <p class="stop-summary" id="stopSummary"></p>
+
+        <div class="stop-tags" id="stopTags"></div>
+
+        <div class="carousel-shell">
+          <div class="carousel-window" id="carouselWindow"></div>
+          <div class="carousel-controls">
+            <button aria-label="Previous photo" class="carousel-button" id="prevPhoto" title="Previous photo" type="button">
+              <span aria-hidden="true">&lsaquo;</span>
+            </button>
+            <div aria-label="Photo position" class="carousel-dots" id="carouselDots"></div>
+            <button aria-label="Next photo" class="carousel-button" id="nextPhoto" title="Next photo" type="button">
+              <span aria-hidden="true">&rsaquo;</span>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <section aria-label="Trip chapters" class="chapter-section">
+        <div class="chapter-rail" id="chapterRail"></div>
+      </section>
+    </section>
+  </main>
+
+
+  <footer>
+    <p><span class="english">&copy; 2026 Micah &amp; Carolina. All rights reserved.</span><span class="spanish">Todos los derechos reservados.</span></p>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="honeymoon.js"></script>
+  <script src="lang-toggle.js"></script>
+</body>
+</html>

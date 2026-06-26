@@ -24,7 +24,7 @@ nav {
   top: 0;
   z-index: 9999; /* <-- bumped up */
 }
-nav ul { display: flex; justify-content: center; list-style: none; }
+nav ul { display: flex; justify-content: center; flex-wrap: wrap; row-gap: 6px; list-style: none; }
 nav li { margin: 0 15px; }
 nav a:hover { text-decoration: underline; }
 
